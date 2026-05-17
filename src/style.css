@@ -101,10 +101,15 @@ p {
     margin: 0 auto;
 }
 
+#guestNavStart,
 #guestNav {
     display: flex;
     justify-content: center;
     margin: 8% auto 0;
+}
+
+#guestNav {
+    margin: 3% auto;
 }
 
 #guestMenu {
@@ -116,6 +121,10 @@ p {
 #guestMenu li a {
     color: black;
     font-size: 18px;
+}
+
+#guestMenu li a:hover {
+    font-weight: 500;
 }
 
 #guestPicDiv {

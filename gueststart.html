@@ -1,23 +1,52 @@
 <!doctype html>
 <html lang="sv">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Estraden</title>
-    <link rel="stylesheet" href="/src/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Lavishly+Yours&display=swap" rel="stylesheet">
-  </head>
-  <body>
-    <header>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Estraden</title>
+  <link rel="stylesheet" href="/src/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Lavishly+Yours&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <header>
+    <picture>
+      <source srcset="estradenMat2.webp" type="image/webp">
+      <img src="estradenMat2.jpg" id="headerBild" alt="Dukade bord på restaurang">
+    </picture>
+  </header>
+  <main>
+    <h1 class="lavishly-yours">Estraden</h1>
+    <p>Benvenuto! Vi på Estraden delar en passion för matlagning och en enorm matglädje. Vi är så glada att du är här
+      för att dela den med oss.</p>
+
+    <nav id="guestNav">
+      <ul id="guestMenu">
+        <li><a href="/guestbooking.html">Boka bord</a></li>
+        <li><a href="/menu.html">Meny</a></li>
+        <li><a href="#openingHours">Öppettider</a></li>
+      </ul>
+    </nav>
+
+    <div id="guestPicDiv">
       <picture>
-        <source srcset="estradenMat2.webp" type="image/webp">
-        <img src="estradenMat2.jpg" id="headerBild" alt="Dukade bord på restaurang">
+        <source srcset="estradenMat4.webp" type="image/webp">
+        <img src="estradenMat4.jpg" width="300" height="300" alt="Smörgås med smältost och tomat">
       </picture>
-    </header>
-    <main>
-      <h1 class="lavishly-yours">Estraden</h1>
-    </main>
-    <footer></footer>
-    <script type="module" src="/src/main.js"></script>
-  </body>
+      <picture>
+        <source srcset="estradenMat5.webp" type="image/webp">
+        <img src="estradenMat5.jpg" width="300" height="300" alt="Stekpanna med pastarätt">
+      </picture>
+      <picture>
+        <source srcset="estradenMat3.webp" type="image/webp">
+        <img src="estradenMat3.jpg" width="300" height="300" alt="Tre pizzor">
+      </picture>
+    </div>
+
+  </main>
+  <footer></footer>
+  <script type="module" src="/src/main.js"></script>
+</body>
+
 </html>

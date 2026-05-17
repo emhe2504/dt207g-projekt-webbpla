@@ -49,11 +49,11 @@ h1 {
     border-radius: 10px;
 }
 
-#startNav {
+nav {
     width: 35%;
 }
 
-#startChoices {
+nav ul {
     display: flex;
     width: 100%;
     text-align: center;
@@ -62,7 +62,7 @@ h1 {
     padding: 0;
 }
 
-#startChoices li {
+nav ul li {
     width: 100%;
 }
 
@@ -74,4 +74,31 @@ h1 {
     padding: 5%;
     padding-left: 8%;
     padding-right: 8%;
+}
+
+p {
+    text-align: center;
+}
+
+#guestNav {
+    display: flex;
+    justify-content: center;
+    margin: 8% auto 0;
+}
+
+#guestMenu {
+    display: flex;
+    list-style: none;
+    padding: 0;
+}
+
+#guestMenu li a {
+    color: black;
+}
+
+#guestPicDiv {
+    display: flex;
+    justify-content: center;
+    gap: 10%;
+    margin-top: 10%;
 }

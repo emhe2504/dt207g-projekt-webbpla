@@ -1,10 +1,18 @@
 .lavishly-yours {
-  font-family: "Lavishly Yours", cursive;
-  font-weight: 400;
-  font-style: normal;
+    font-family: "Lavishly Yours", cursive;
+    font-weight: 400;
+    font-style: normal;
 }
 
-html, body {
+@keyframes fade {
+    to {
+        opacity: 1;
+        filter: brightness(1);
+    }
+}
+
+html,
+body {
     height: 100%;
     margin: 0;
 }
@@ -30,6 +38,8 @@ body {
     background-size: cover;
     background-position: center;
     opacity: 0.8;
+    filter: brightness(0);
+    animation: fade 3s ease forwards;
 }
 
 #headerBild {
@@ -71,13 +81,13 @@ nav ul li {
     font-weight: 500;
     font-size: 16px;
     background-color: black;
-    padding: 5%;
-    padding-left: 8%;
-    padding-right: 8%;
+    padding: 5% 8%;
 }
 
 p {
     text-align: center;
+    max-width: 70ch;
+    margin: 0 auto;
 }
 
 #guestNav {
@@ -94,11 +104,60 @@ p {
 
 #guestMenu li a {
     color: black;
+    font-size: 18px;
 }
 
 #guestPicDiv {
     display: flex;
     justify-content: center;
-    gap: 10%;
-    margin-top: 10%;
+    gap: 8%;
+    margin: 10% 2%;
+}
+
+#sandwich,
+#pasta,
+#pizza {
+    width: 100%;
+    box-shadow: 1px 1px 1px grey;
+}
+
+h2,
+h3 {
+    text-align: center;
+}
+
+#restaurantImg {
+    display: block;
+    width: 70%;
+    margin: 10% auto;
+}
+
+#openingHours,
+#findUs {
+    margin: 10% auto;
+}
+
+#lunch,
+#dinner,
+#contactInfo {
+    line-height: 2.5em;
+}
+
+footer {
+    display: flex;
+    justify-content: center;
+    background-color: black;
+    padding: 3% 0;
+}
+
+footer nav ul {
+    display: flex;
+    list-style: none;
+    padding: 2%;
+}
+
+footer nav ul li,
+footer nav ul li a {
+    text-decoration: none;
+    color: white;
 }

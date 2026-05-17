@@ -29,23 +29,70 @@
       </ul>
     </nav>
 
+
     <div id="guestPicDiv">
       <picture>
         <source srcset="estradenMat4.webp" type="image/webp">
-        <img src="estradenMat4.jpg" width="300" height="300" alt="Smörgås med smältost och tomat">
+        <img src="estradenMat4.jpg" id="sandwich" alt="Smörgås med smältost och tomat">
       </picture>
       <picture>
         <source srcset="estradenMat5.webp" type="image/webp">
-        <img src="estradenMat5.jpg" width="300" height="300" alt="Stekpanna med pastarätt">
+        <img src="estradenMat5.jpg" id="pasta" alt="Stekpanna med pastarätt">
       </picture>
       <picture>
         <source srcset="estradenMat3.webp" type="image/webp">
-        <img src="estradenMat3.jpg" width="300" height="300" alt="Tre pizzor">
+        <img src="estradenMat3.jpg" id="pizza" alt="Tre pizzor">
       </picture>
     </div>
 
+    <h2 id="aboutUs">Vilka är vi?</h2>
+    <p>Vi på restaurang Estraden strävar efter att erbjuda våra gäster en upplevelse utöver det vanliga, för alla dina sinnen.
+      Smaker från det italienska köket, till tonerna av den klassiska italienska musiken och med en personal där alla
+      kan tala Italienska, skapas den ultimata italienska upplevelsen. Nästan som att du är i Italien på riktigt.</p>
+
+    <picture>
+      <source srcset="estradenMat6.webp" type="image/webp">
+      <img src="estradenMat6.jpg" id="restaurantImg" alt="Uteservering på italiensk restaurang">
+    </picture>
+
+    <section id="openingHours">
+      <h3>Öppettider</h3>
+      <br>
+      <div id="lunch">
+        <p>LUNCH</p>
+        <br>
+        <p>Måndag - Torsdag 11.00-13.30</p>
+        <p>Fredag - Söndag 11.30-14.30</p>
+      </div>
+      <br>
+      <div id="dinner">
+        <p>MIDDAG</p>
+        <br>
+        <p>Måndag - Torsdag 16.30-22.00</p>
+        <p>Fredag - Söndag 16.30-23.00</p>
+      </div>
+    </section>
+
+    <section id="findUs">
+      <h3>Hitta hit</h3>
+      <br>
+      <div id="contactInfo">
+      <p>Stockholmsvägen 12, STOCKKHOLM</p>
+      <p>estraden@mail.com</p>
+      <p>08 - 555 00 88</p>
+      </div>
+    </section>
+
   </main>
-  <footer></footer>
+  <footer>
+    <nav>
+      <ul id="footerList">
+        <li>Integritet</li>
+        <li>Arbeta i vårt team</li>
+        <li><a href="#aboutUs">Om oss</a></li>
+      </ul>
+    </nav>
+  </footer>
   <script type="module" src="/src/main.js"></script>
 </body>
 

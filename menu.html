@@ -1,14 +1,80 @@
 <!doctype html>
 <html lang="sv">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Estraden</title>
-  </head>
-  <body>
-    <header></header>
-    <main></main>
-    <footer></footer>
-    <script type="module" src="/src/main.js"></script>
-  </body>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Estraden</title>
+  <link rel="stylesheet" href="/src/style.css">
+</head>
+
+<body>
+
+  <header>
+    <picture>
+      <source srcset="estradenMat2.webp" type="image/webp">
+      <img src="estradenMat2.jpg" id="headerBild" alt="Dukade bord på restaurang">
+    </picture>
+  </header>
+
+  <main>
+
+    <nav id="guestNav">
+      <ul id="guestMenu">
+        <li><a href="/gueststart.html">Startsida</a></li>
+        <li><a href="/menu.html">Meny</a></li>
+        <li><a href="/gueststart.html#findUs">Kontakt</a></li>
+      </ul>
+    </nav>
+
+    <h1>Meny</h1>
+
+    <picture id="menuPrint">
+      <source srcset="menuPrint.webp" type="image/webp">
+      <img src="menuPrint.jpg" alt="Startbild på meny med estraden-text samt bilder på mat">
+    </picture>
+
+    <div id="menu">
+
+      <section id="startersSection">
+      <h2>Starters</h2>
+      <br>
+      <div id="starters"></div>
+      </section>
+
+      <section id="mainMealsSection">
+      <h2>Main</h2>
+      <br>
+      <div id="mainMeals"></div>
+      </section>
+
+      <section id="dessertSection">
+      <h2>Dessert</h2>
+      <br>
+      <div id="dessert"></div>
+      </section>
+
+      <section id="beverageSection">
+      <h2>Beverage</h2>
+      <br>
+      <div id="beverage"></div>
+      </section>
+
+    </div>
+
+  </main>
+
+  <footer>
+    <nav>
+      <ul id="footerList">
+        <li>Integritet</li>
+        <li>Arbeta i vårt team</li>
+        <li><a href="#aboutUs">Om oss</a></li>
+      </ul>
+    </nav>
+  </footer>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+
 </html>

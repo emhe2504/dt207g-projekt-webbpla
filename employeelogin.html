@@ -4,11 +4,41 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Estraden</title>
+    <link rel="stylesheet" href="/src/style.css">
   </head>
   <body>
-    <header></header>
-    <main></main>
-    <footer></footer>
+    <header>
+    <picture>
+      <source srcset="estradenMat2.webp" type="image/webp">
+      <img src="estradenMat2.jpg" id="headerBild" alt="Dukade bord på restaurang">
+    </picture>
+  </header>
+  <main>
+
+    <h1>Logga in</h1>
+    
+    <ul id="errorUl"></ul>
+    <form action="post" id="loginForm">
+
+      <label for="email">E-postadress: </label>
+      <input type="text" id="email">
+
+      <label for="password">Lösenord: </label>
+      <input type="text" id="password">
+
+      <button type="submit" id="loginButton">Logga in</button>
+    </form>
+
+  </main>
+  <footer>
+    <nav>
+      <ul id="footerList">
+        <li>Integritet</li>
+        <li>Arbeta i vårt team</li>
+        <li><a href="/gueststart.html#aboutUs">Om oss</a></li>
+      </ul>
+    </nav>
+  </footer>
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>

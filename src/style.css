@@ -168,7 +168,8 @@ h3 {
 }
 
 #reservationForm,
-#getBookingForm {
+#getBookingForm,
+#loginForm {
     display: flex;
     flex-direction: column;
     width: 25%;
@@ -193,7 +194,8 @@ textarea {
 }
 
 #reservationButton,
-#getBookingButton {
+#getBookingButton,
+#loginButton {
     padding: 1.5%;
     border: 1px solid #6F4E37;
     background-color: #ECB176;

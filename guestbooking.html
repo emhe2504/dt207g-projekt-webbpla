@@ -31,6 +31,7 @@
     <p>Du kan antingen boka via formuläret här nedanför eller ringa och boka ett bord
       på telefonnummer 08 - 555 00 88.</p>
 
+      <ul id="errorUl"></ul>
     <form action="post" id="reservationForm">
 
       <label for="email">E-postadress: </label>
@@ -54,10 +55,23 @@
       <button type="submit" id="reservationButton">Skicka bokning</button>
     </form>
 
-    <section id="confimation">
+    <section id="confirmation" class="is_hidden">
       <h2>Bokning genomförd!</h2>
+      <p id="confirmationID"></p>
+      <br>
       <p>Vi har nu mottagit din bordsbokning och en bekräftelse kommer inom kort att skickas till din angivna
         e-postadress.</p>
+    </section>
+
+    <section>
+      <h2>Se din bokning</h2>
+      <p id="getBookingError"></p>
+      <form id="getBookingForm">
+        <input type="text" id="bookingId" placeholder="Ange bokningsID">
+        <br>
+        <button type="submit" id="getBookingButton">Hämta bokning</button>
+      </form>
+      <div id="bookingResult"></div>
     </section>
 
   </main>

@@ -1,3 +1,7 @@
+.is_hidden {
+    display: none !important;
+}
+
 .lavishly-yours {
     font-family: "Lavishly Yours", cursive;
     font-weight: 400;
@@ -163,7 +167,8 @@ h3 {
     line-height: 2.5em;
 }
 
-#reservationForm {
+#reservationForm,
+#getBookingForm {
     display: flex;
     flex-direction: column;
     width: 25%;
@@ -171,6 +176,10 @@ h3 {
     border: 1px solid #6F4E37;
     padding: 4%;
     background-color: white;
+}
+
+#getBookingForm {
+    margin: 2% auto 5%;
 }
 
 input[type="text"],
@@ -183,7 +192,8 @@ textarea {
     border: 1px solid #6F4E37;
 }
 
-#reservationButton {
+#reservationButton,
+#getBookingButton {
     padding: 1.5%;
     border: 1px solid #6F4E37;
     background-color: #ECB176;
@@ -195,7 +205,8 @@ textarea {
     background-color: #FED8B1;
 }
 
-#confimation {
+#confirmation,
+#bookingResult {
     width: 55%;
     margin: 6% auto;
     border: 1px solid #6F4E37;

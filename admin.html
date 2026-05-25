@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="sv">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Estraden</title>
+  <link rel="stylesheet" href="/src/style.css">
+  <script src="/src/authChecker.js"></script>
+</head>
+
+<body>
+  <header>
+    <picture>
+      <source srcset="estradenMat2.webp" type="image/webp">
+      <img src="estradenMat2.jpg" id="headerBild" alt="Dukade bord på restaurang">
+    </picture>
+  </header>
+  <main>
+
+    <h1>Admin</h1>
+
+    <p>Välj ett alternativ:</p>
+
+    <nav id="adminMenu">
+      <ul>
+        <li><a href="admin.html#adminBookings">Hantera bordsbokningar</a></li>
+        <li><a href="register.html#regEmployee">Lägg till konto för anställd</a></li>
+        <li><a href="menu.html#manageMenu">Hantera meny</a></li>
+      </ul>
+    </nav>
+
+    <section id="adminBookings">
+      <h2>Hantera bordsbokningar</h2>
+
+      <p id="addBooking">Lägg till bokning:</p>
+
+      <ul id="errorUl"></ul>
+      <form action="post" id="adminReservationForm">
+
+        <label for="ADemail">E-postadress: </label>
+        <input type="text" id="ADemail">
+
+        <label for="ADphonenumber">Telefonnummer: </label>
+        <input type="text" id="ADphonenumber">
+
+        <label for="ADreservationDate">Datum:</label>
+        <input type="date" id="ADreservationDate">
+
+        <label for="ADreservationTime">Tid:</label>
+        <input type="time" id="ADreservationTime">
+
+        <label for="ADnumberofPeople">Antal besökare (vid fler än 8 besökare måste ni ringa):</label>
+        <input type="number" step="1" min="1" max="8" id="ADnumberofPeople">
+
+        <label for="ADcomment">Något du vill meddela oss inför ditt besök: </label>
+        <textarea id="ADcomment"></textarea>
+
+        <button type="submit" id="ADreservationButton">Gör bokning</button>
+      </form>
+
+      <div id="ADconfirmation" class="is_hidden">
+      <h2>Bokning genomförd!</h2>
+      <p id="ADconfirmationID"></p>
+      </div>
+
+    </section>
+
+  </main>
+  <footer>
+    <nav>
+      <ul id="footerList">
+        <li>Integritet</li>
+        <li>Arbeta i vårt team</li>
+        <li><a href="/gueststart.html#aboutUs">Om oss</a></li>
+      </ul>
+    </nav>
+  </footer>
+  <script type="module" src="/src/main.js"></script>
+</body>
+
+</html>

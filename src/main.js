@@ -1,30 +1,43 @@
+//För gästers meny:
 const menu = document.getElementById("menu");
-
 const starters = document.getElementById("starters");
 const mainMeals = document.getElementById("mainMeals");
 const dessert = document.getElementById("dessert");
 const beverage = document.getElementById("beverage");
 
+//För gästers bokningar:
 const reservationForm = document.getElementById("reservationForm");
 const bookingConfirmation = document.getElementById("confirmation");
 const getBookingForm = document.getElementById("getBookingForm");
 const resultSpot = document.getElementById("bookingResult");
 
+//För anställlda
 const loginForm = document.getElementById("loginForm");
+
+const adminReservationForm = document.getElementById("adminReservationForm");
+const ADbookingConfirmation = document.getElementById("ADconfirmation");
+
 
 window.addEventListener("DOMContentLoaded", init);
 
 function init() {
 
+    //För gästers meny:
     if (menu) { getMenu(); }
 
+    //För gästers bokningar:
     if (bookingConfirmation) { bookingConfirmation.classList.add("is_hidden"); }
     if (resultSpot) { resultSpot.classList.add("is_hidden"); }
     if (reservationForm) { reservationForm.addEventListener("submit", addBooking); }
     if (getBookingForm) { getBookingForm.addEventListener("submit", getOneBooking); }
 
+    //För anställda:
     if (loginForm) { loginForm.addEventListener("submit", login); }
+
+    if (adminReservationForm) { adminReservationForm.addEventListener("submit", addAdminBooking); }
+    if (ADbookingConfirmation) { ADbookingConfirmation.classList.add("is_hidden"); }
 }
+
 
 //Hämta menu från API
 async function getMenu() {
@@ -94,6 +107,8 @@ function renderMenu(jsonData) {
     });
 }
 
+
+//Lägga till bokning (för gäster)
 async function addBooking(event) {
 
     event.preventDefault(); //Inte ladda om sidan
@@ -172,6 +187,7 @@ async function addBooking(event) {
     }
 }
 
+//Hämta en bokning via id (för gäster)
 async function getOneBooking(event) {
 
     event.preventDefault(); //Inte ladda om sidan
@@ -232,6 +248,7 @@ async function getOneBooking(event) {
     }
 }
 
+
 //Logga in på registerat konto för anställd
 async function login(event) {
 
@@ -289,11 +306,93 @@ async function login(event) {
 
         if (data.token) {
             localStorage.setItem("Employee-token", data.token);
-            window.location.href = "employee.html";
+            window.location.href = "admin.html";
         }
 
     } catch (error) {
     console.log(error);
 }
 
+}
+
+//Lägga till bokning (för anställda)
+async function addAdminBooking(event) {
+
+    event.preventDefault(); //Inte ladda om sidan
+
+    //Värden från input
+    const addedEmail = document.getElementById("ADemail").value;
+    const addedPhoneNumber = document.getElementById("ADphonenumber").value;
+    const addedReservationDate = document.getElementById("ADreservationDate").value;
+    const addedReservationTime = document.getElementById("ADreservationTime").value;
+    const addedNumberofPeople = document.getElementById("ADnumberofPeople").value;
+    const addedComment = document.getElementById("ADcomment").value;
+
+    //Felmeddelanden vid tomma inputfält
+    const errors = [];
+    const errorSpot = document.getElementById("errorUl");
+    errorSpot.innerHTML = "";
+
+    if (!addedEmail) { errors.push("Fyll i e-postadress") }
+    if (!addedPhoneNumber) { errors.push("Fyll i telefonnummer") }
+    if (!addedReservationDate) { errors.push("Fyll i datum") }
+    if (!addedReservationTime) { errors.push("Fyll i tid") }
+    if (!addedNumberofPeople) { errors.push("Fyll i antal personer") }
+
+    if (errors.length > 0) {
+        errors.forEach(error => {
+            const newLi = document.createElement("li");
+            newLi.textContent = error;
+            errorSpot.appendChild(newLi);
+        });
+        return;
+    }
+
+    const booking = {
+        email: addedEmail,
+        phonenumber: addedPhoneNumber,
+        date: addedReservationDate,
+        time: addedReservationTime,
+        people: addedNumberofPeople,
+        comment: addedComment
+    }
+
+    const token = localStorage.getItem("Employee-token");
+
+    try {
+
+        const response = await fetch("http://localhost:3001/employeeReservation", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + token
+            },
+            body: JSON.stringify(booking)
+        })
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            console.log(data.message);
+            return;
+
+        }
+
+        console.log(data);
+
+        document.getElementById("ADemail").value = "";
+        document.getElementById("ADphonenumber").value = "";
+        document.getElementById("ADreservationDate").value = "";
+        document.getElementById("ADreservationTime").value = "";
+        document.getElementById("ADnumberofPeople").value = "";
+        document.getElementById("ADcomment").value = "";
+
+        const id = data._id;
+        const confirmationID = document.getElementById("ADconfirmationID");
+        ADbookingConfirmation.classList.remove("is_hidden");
+        confirmationID.textContent = `BokningsID är: ${id}`;
+
+    } catch (error) {
+        console.log(error);
+    }
 }

@@ -112,7 +112,8 @@ p {
     margin: 8% auto 0;
 }
 
-#guestNav {
+#guestNav,
+#adminMenu {
     margin: 3% auto;
 }
 
@@ -227,6 +228,35 @@ textarea {
 #dessertSection,
 #beverageSection {
     margin: 4% auto;
+}
+
+#addBooking {
+    margin: 6% auto 0 auto;;
+}
+
+#adminBookings {
+    width: 60%;
+    margin: 10% auto;
+    border: 1px solid #6F4E37;
+    padding: 1%;
+}
+
+#adminReservationForm {
+    display: flex;
+    flex-direction: column;
+    width: 45%;
+    margin: 3% auto;
+    border: 1px solid #6F4E37;
+    padding: 4%;
+    background-color: white;
+}
+
+#ADreservationButton {
+    padding: 1.5%;
+    border: 1px solid #6F4E37;
+    background-color: #ECB176;
+    width: 45%;
+    border-radius: 5px;
 }
 
 footer {

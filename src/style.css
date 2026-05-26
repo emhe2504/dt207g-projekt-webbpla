@@ -208,7 +208,8 @@ textarea {
 #getBookingButton,
 #loginButton,
 #ADreservationButton,
-#ADgetBookingButton {
+#ADgetBookingButton,
+#changeBookingButton {
     padding: 1.5%;
     border: 1px solid #6F4E37;
     background-color: #ECB176;
@@ -217,7 +218,9 @@ textarea {
 }
 
 #changeBookingButton {
-    margin-top: 3%;
+    padding: 0.5%;
+    margin: 5% 0 0 2%;
+    width: 23%;
 }
 
 #reservationButton:hover,

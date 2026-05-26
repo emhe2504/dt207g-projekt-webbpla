@@ -19,6 +19,10 @@ const adminBookingConfirmation = document.getElementById("adminConfirmation");
 const getBookingAdmin = document.getElementById("getBookingAdmin");
 const adminResultDiv = document.getElementById("adminResultDiv");
 const adminResultSpot = document.getElementById("adminBookingResult");
+const changeBookingButton = document.getElementById("changeBookingButton");
+
+//Variabel för att lagra hämtad bokning lokalt (för att ändra och radera)
+let retrievedBooking = null;
 
 
 window.addEventListener("DOMContentLoaded", init);
@@ -42,6 +46,10 @@ function init() {
     if (getBookingAdmin) { getBookingAdmin.addEventListener("submit", getOneAdminBooking); }
     if (adminResultDiv) { adminResultDiv.classList.add("is_hidden"); }
     if (adminResultSpot) { adminResultSpot.classList.add("is_hidden"); }
+
+    if (changeBookingButton) {
+        changeBookingButton.addEventListener("click", changeBooking);
+    }
 }
 
 
@@ -317,8 +325,8 @@ async function login(event) {
         }
 
     } catch (error) {
-    console.log(error);
-}
+        console.log(error);
+    }
 
 }
 
@@ -443,6 +451,8 @@ async function getOneAdminBooking(event) {
 
         }
 
+        retrievedBooking = data; //Lägga till data i den lokala varibeln för aktuell hämtad bokning
+
         const date = data.date;
         const fixedDate = new Date(date).toLocaleDateString('sv-SE');
 
@@ -469,4 +479,25 @@ async function getOneAdminBooking(event) {
     } catch (error) {
         console.log(error);
     }
+}
+
+
+//Ändra en bokning (för anställda)
+async function changeBooking() {
+    const fixedDate = retrievedBooking.date.split("T")[0];  //Rätt datumformat för värdet ska passa i form (date)
+    const fixedTime = retrievedBooking.time.replace(".", ":"); //Byta punkt till kolon för värdet ska passa i form (time)
+
+    document.getElementById("ADemail").value = retrievedBooking.email;
+    document.getElementById("ADphonenumber").value = retrievedBooking.phonenumber;
+    document.getElementById("ADreservationDate").value = fixedDate;
+    document.getElementById("ADreservationTime").value = fixedTime;
+    document.getElementById("ADnumberofPeople").value = retrievedBooking.people;
+    document.getElementById("ADcomment").value = retrievedBooking.comment;
+
+    document.getElementById("adminReservationForm").scrollIntoView();
+
+    const ADreservationButton = document.getElementById("ADreservationButton");
+    ADreservationButton.textContent = "Uppdatera bokning";
+
+
 }

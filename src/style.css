@@ -208,6 +208,7 @@ textarea {
 #getBookingButton,
 #loginButton,
 #ADreservationButton,
+#ADupdateButton,
 #ADgetBookingButton,
 #changeBookingButton {
     padding: 1.5%;
@@ -227,13 +228,15 @@ textarea {
 #getBookingButton:hover,
 #loginButton:hover,
 #ADreservationButton:hover,
+#ADupdateButton:hover,
 #ADgetBookingButton:hover {
     background-color: #FED8B1;
 }
 
 #confirmation,
 #bookingResult,
-#adminResultDiv {
+#adminResultDiv,
+#adminConfirmation {
     width: 55%;
     margin: 6% auto;
     border: 1px solid #6F4E37;

@@ -19,7 +19,9 @@ const adminBookingConfirmation = document.getElementById("adminConfirmation");
 const getBookingAdmin = document.getElementById("getBookingAdmin");
 const adminResultDiv = document.getElementById("adminResultDiv");
 const adminResultSpot = document.getElementById("adminBookingResult");
+
 const changeBookingButton = document.getElementById("changeBookingButton");
+const ADupdateButton = document.getElementById("ADupdateButton");
 
 //Variabel för att lagra hämtad bokning lokalt (för att ändra och radera)
 let retrievedBooking = null;
@@ -49,6 +51,17 @@ function init() {
 
     if (changeBookingButton) {
         changeBookingButton.addEventListener("click", changeBooking);
+
+        if (ADupdateButton) {
+            ADupdateButton.addEventListener("click", updateBooking);
+        }
+
+        //När anställd trycker på skärmen försvinner bekräftelser
+        document.addEventListener("click", () => {
+            if (adminBookingConfirmation) { adminBookingConfirmation.classList.add("is_hidden"); }
+            if (adminResultDiv) { adminResultDiv.classList.add("is_hidden"); }
+            if (adminResultSpot) { adminResultSpot.classList.add("is_hidden"); }
+        })
     }
 }
 
@@ -403,8 +416,13 @@ async function addAdminBooking(event) {
         document.getElementById("ADcomment").value = "";
 
         const id = data._id;
-        const confirmationID = document.getElementById("ADconfirmationID");
+
         adminBookingConfirmation.classList.remove("is_hidden");
+
+        const confirmationHead = document.getElementById("ADconfirmationHead");
+        confirmationHead.textContent = `Bokning genomförd!`;
+
+        const confirmationID = document.getElementById("ADconfirmationID");
         confirmationID.textContent = `BokningsID är: ${id}`;
 
     } catch (error) {
@@ -483,7 +501,10 @@ async function getOneAdminBooking(event) {
 
 
 //Ändra en bokning (för anställda)
-async function changeBooking() {
+function changeBooking() {
+
+    if (!retrievedBooking) return; //Return - om ej GET gjorts ovan, ingen bokning hämtad, ingen data
+    
     const fixedDate = retrievedBooking.date.split("T")[0];  //Rätt datumformat för värdet ska passa i form (date)
     const fixedTime = retrievedBooking.time.replace(".", ":"); //Byta punkt till kolon för värdet ska passa i form (time)
 
@@ -496,8 +517,94 @@ async function changeBooking() {
 
     document.getElementById("adminReservationForm").scrollIntoView();
 
-    const ADreservationButton = document.getElementById("ADreservationButton");
-    ADreservationButton.textContent = "Uppdatera bokning";
 
+    ADupdateButton.classList.remove("is_hidden");
+}
+
+async function updateBooking() {
+
+    //Värden från input
+    const addedEmail = document.getElementById("ADemail").value;
+    const addedPhoneNumber = document.getElementById("ADphonenumber").value;
+    const addedReservationDate = document.getElementById("ADreservationDate").value;
+    const addedReservationTime = document.getElementById("ADreservationTime").value;
+    const addedNumberofPeople = document.getElementById("ADnumberofPeople").value;
+    const addedComment = document.getElementById("ADcomment").value;
+
+    //Felmeddelanden vid tomma inputfält
+    const errors = [];
+    const errorSpot = document.getElementById("errorUl");
+    errorSpot.innerHTML = "";
+
+    if (!addedEmail) { errors.push("Fyll i e-postadress") }
+    if (!addedPhoneNumber) { errors.push("Fyll i telefonnummer") }
+    if (!addedReservationDate) { errors.push("Fyll i datum") }
+    if (!addedReservationTime) { errors.push("Fyll i tid") }
+    if (!addedNumberofPeople) { errors.push("Fyll i antal personer") }
+
+    if (errors.length > 0) {
+        errors.forEach(error => {
+            const newLi = document.createElement("li");
+            newLi.textContent = error;
+            errorSpot.appendChild(newLi);
+        });
+        return;
+    }
+
+    const booking = {
+        email: addedEmail,
+        phonenumber: addedPhoneNumber,
+        date: addedReservationDate,
+        time: addedReservationTime,
+        people: addedNumberofPeople,
+        comment: addedComment
+    }
+
+    const token = localStorage.getItem("Employee-token");
+    const id = retrievedBooking._id;
+
+    try {
+
+        const response = await fetch(`http://localhost:3001/employeereservation/${id}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + token
+            },
+            body: JSON.stringify(booking)
+        })
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            console.log(data.message);
+            return;
+
+        }
+
+        console.log(data);
+
+        document.getElementById("ADemail").value = "";
+        document.getElementById("ADphonenumber").value = "";
+        document.getElementById("ADreservationDate").value = "";
+        document.getElementById("ADreservationTime").value = "";
+        document.getElementById("ADnumberofPeople").value = "";
+        document.getElementById("ADcomment").value = "";
+
+        adminResultDiv.classList.add("is_hidden");
+        ADupdateButton.classList.add("is_hidden");
+
+
+        adminBookingConfirmation.classList.remove("is_hidden");
+
+        const confirmationHead = document.getElementById("ADconfirmationHead");
+        confirmationHead.textContent = `Bokning uppdaterad!`;
+
+        const confirmationID = document.getElementById("ADconfirmationID");
+        confirmationID.textContent = `Bokning uppdaterad, men behåller samma bokningsID!`;
+
+    } catch (error) {
+        console.log(error);
+    }
 
 }

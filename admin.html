@@ -36,7 +36,7 @@
       <h2 id="addBooking">Lägg till bokning:</h2>
 
       <ul id="errorUl"></ul>
-      <form action="post" id="adminReservationForm">
+      <form id="adminReservationForm">
 
         <label for="ADemail">E-postadress: </label>
         <input type="text" id="ADemail">
@@ -57,10 +57,12 @@
         <textarea id="ADcomment"></textarea>
 
         <button type="submit" id="ADreservationButton">Gör bokning</button>
+        <br>
+        <button type="button" id="ADupdateButton" class="is_hidden">Uppdatera bokning</button>
       </form>
 
       <div id="adminConfirmation" class="is_hidden">
-        <h2>Bokning genomförd!</h2>
+        <h2 id="ADconfirmationHead"></h2>
         <p id="ADconfirmationID"></p>
       </div>
 
@@ -75,7 +77,7 @@
 
         <div id="adminResultDiv">
           <div id="adminBookingResult"></div>
-          <button id="changeBookingButton">Ändra bokning</button>
+          <button type="button" id="changeBookingButton">Ändra bokning</button>
         </div>
 
       </div>

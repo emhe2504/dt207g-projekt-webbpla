@@ -184,6 +184,16 @@ h3 {
     margin: 2% auto 5%;
 }
 
+#getBookingAdmin {
+    display: flex;
+    flex-direction: column;
+    width: 45%;
+    margin: 2% auto 5%;
+    border: 1px solid #6F4E37;
+    padding: 4%;
+    background-color: white;
+}
+
 input[type="text"],
 input[type="date"],
 input[type="time"],
@@ -196,7 +206,9 @@ textarea {
 
 #reservationButton,
 #getBookingButton,
-#loginButton {
+#loginButton,
+#ADreservationButton,
+#ADgetBookingButton {
     padding: 1.5%;
     border: 1px solid #6F4E37;
     background-color: #ECB176;
@@ -204,17 +216,31 @@ textarea {
     border-radius: 5px;
 }
 
-#reservationButton:hover {
+#changeBookingButton {
+    margin-top: 3%;
+}
+
+#reservationButton:hover,
+#getBookingButton:hover,
+#loginButton:hover,
+#ADreservationButton:hover,
+#ADgetBookingButton:hover {
     background-color: #FED8B1;
 }
 
 #confirmation,
-#bookingResult {
+#bookingResult,
+#adminResultDiv {
     width: 55%;
     margin: 6% auto;
     border: 1px solid #6F4E37;
     padding: 2%;
     background-color: white;
+}
+
+#adminResultDiv {
+    width: 65%;
+    margin-bottom: 1%;
 }
 
 #menuPrint {
@@ -230,7 +256,8 @@ textarea {
     margin: 4% auto;
 }
 
-#addBooking {
+#addBooking,
+#viewBooking {
     margin: 6% auto 0 auto;;
 }
 
@@ -249,14 +276,6 @@ textarea {
     border: 1px solid #6F4E37;
     padding: 4%;
     background-color: white;
-}
-
-#ADreservationButton {
-    padding: 1.5%;
-    border: 1px solid #6F4E37;
-    background-color: #ECB176;
-    width: 45%;
-    border-radius: 5px;
 }
 
 footer {

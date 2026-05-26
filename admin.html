@@ -33,7 +33,7 @@
     <section id="adminBookings">
       <h2>Hantera bordsbokningar</h2>
 
-      <p id="addBooking">Lägg till bokning:</p>
+      <h2 id="addBooking">Lägg till bokning:</h2>
 
       <ul id="errorUl"></ul>
       <form action="post" id="adminReservationForm">
@@ -59,9 +59,25 @@
         <button type="submit" id="ADreservationButton">Gör bokning</button>
       </form>
 
-      <div id="ADconfirmation" class="is_hidden">
-      <h2>Bokning genomförd!</h2>
-      <p id="ADconfirmationID"></p>
+      <div id="adminConfirmation" class="is_hidden">
+        <h2>Bokning genomförd!</h2>
+        <p id="ADconfirmationID"></p>
+      </div>
+
+      <div id="viewBooking">
+        <h2>Se bokning</h2>
+        <p id="adminBookingError"></p>
+        <form id="getBookingAdmin">
+          <input type="text" id="ADbookingId" placeholder="Ange bokningsID">
+          <br>
+          <button type="submit" id="ADgetBookingButton">Hämta bokning</button>
+        </form>
+
+        <div id="adminResultDiv">
+          <div id="adminBookingResult"></div>
+          <button id="changeBookingButton">Ändra bokning</button>
+        </div>
+
       </div>
 
     </section>

@@ -15,7 +15,10 @@ const resultSpot = document.getElementById("bookingResult");
 const loginForm = document.getElementById("loginForm");
 
 const adminReservationForm = document.getElementById("adminReservationForm");
-const ADbookingConfirmation = document.getElementById("ADconfirmation");
+const adminBookingConfirmation = document.getElementById("adminConfirmation");
+const getBookingAdmin = document.getElementById("getBookingAdmin");
+const adminResultDiv = document.getElementById("adminResultDiv");
+const adminResultSpot = document.getElementById("adminBookingResult");
 
 
 window.addEventListener("DOMContentLoaded", init);
@@ -35,7 +38,10 @@ function init() {
     if (loginForm) { loginForm.addEventListener("submit", login); }
 
     if (adminReservationForm) { adminReservationForm.addEventListener("submit", addAdminBooking); }
-    if (ADbookingConfirmation) { ADbookingConfirmation.classList.add("is_hidden"); }
+    if (adminBookingConfirmation) { adminBookingConfirmation.classList.add("is_hidden"); }
+    if (getBookingAdmin) { getBookingAdmin.addEventListener("submit", getOneAdminBooking); }
+    if (adminResultDiv) { adminResultDiv.classList.add("is_hidden"); }
+    if (adminResultSpot) { adminResultSpot.classList.add("is_hidden"); }
 }
 
 
@@ -217,6 +223,7 @@ async function getOneBooking(event) {
 
         if (!response.ok) {
             console.log(data.message);
+            errorSpot.textContent = `${data.message}`;
             return;
 
         }
@@ -361,7 +368,7 @@ async function addAdminBooking(event) {
 
     try {
 
-        const response = await fetch("http://localhost:3001/employeeReservation", {
+        const response = await fetch("http://localhost:3001/employeereservation", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -389,8 +396,75 @@ async function addAdminBooking(event) {
 
         const id = data._id;
         const confirmationID = document.getElementById("ADconfirmationID");
-        ADbookingConfirmation.classList.remove("is_hidden");
+        adminBookingConfirmation.classList.remove("is_hidden");
         confirmationID.textContent = `BokningsID är: ${id}`;
+
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+
+//Hämta en bokning via id (för anställda)
+async function getOneAdminBooking(event) {
+
+    event.preventDefault(); //Inte ladda om sidan
+
+    //Värden från input
+    const addedID = document.getElementById("ADbookingId").value;
+
+    //Felmeddelanden vid tomma inputfält
+    const errorSpot = document.getElementById("adminBookingError");
+    errorSpot.textContent = "";
+
+    if (!addedID) {
+        errorSpot.textContent = "Ange bokningsID";
+        return;
+    }
+
+    const token = localStorage.getItem("Employee-token");
+
+    try {
+
+        const response = await fetch(`http://localhost:3001/employeereservation/${addedID}`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + token
+            }
+        })
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            console.log(data.message);
+            errorSpot.textContent = `${data.message}`;
+            return;
+
+        }
+
+        const date = data.date;
+        const fixedDate = new Date(date).toLocaleDateString('sv-SE');
+
+        document.getElementById("ADbookingId").value = "";
+
+        if (adminResultDiv) {
+
+            adminResultDiv.classList.remove("is_hidden");
+            adminResultSpot.classList.remove("is_hidden");
+            adminResultSpot.innerHTML = "";
+
+            adminResultSpot.innerHTML += `
+                <article>
+                <h3>BokningsID: ${data._id}</h3>
+                <p><strong>Email:</strong> ${data.email}</p>
+                <p><strong>Telefonnummer:</strong> ${data.phonenumber}</p>
+                <p><strong>Datum:</strong> ${fixedDate}</p>
+                <p><strong>Tid:</strong> ${data.time}</p>
+                <p><strong>Antal personer:</strong> ${data.people}</p>
+                <p><strong>Kommentar:</strong> ${data.comment}</p>
+                </article>`
+        }
 
     } catch (error) {
         console.log(error);

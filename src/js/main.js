@@ -24,6 +24,8 @@ const updateMenuButton = document.getElementById("updateMenuButton");
 const changeMenuButton = document.getElementById("changeMenuButton");
 const deleteMenuButton = document.getElementById("deleteMenuButton");
 
+const logOutButton = document.getElementById("logOutButton");
+
 
 //Variabler för att lagra hämtad bokning eller måltid lokalt
 let retrievedBooking = null;
@@ -74,6 +76,13 @@ function init() {
 
     if (deleteMealButton) {
         deleteMealButton.addEventListener("click", deleteMeal);
+    }
+
+    if (logOutButton) {
+        logOutButton.addEventListener("click", () => {
+            localStorage.removeItem("Employee-token");
+            window.location.href = "employeelogin.html";
+        })
     }
 }
 

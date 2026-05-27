@@ -37,7 +37,7 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: 100svh;
     background-image: url('/estradenStart.webp');
     background-size: cover;
     background-position: center;
@@ -246,7 +246,7 @@ select {
     display: block;
     width: 10%;
     padding: 0.5%;
-    margin: 4% auto 0% auto; 
+    margin: 4% auto 0% auto;
 }
 
 #reservationButton:hover,
@@ -266,7 +266,8 @@ select {
 #bookingResult,
 #adminResultDiv,
 #adminConfirmation,
-#getMealDiv {
+#getMealDiv,
+#menuConfirmation {
     width: 55%;
     margin: 6% auto;
     border: 1px solid #6F4E37;
@@ -326,6 +327,30 @@ select {
     background-color: white;
 }
 
+#adminErrorUl,
+#regErrorUl,
+#regErrorP,
+#adminBookingError,
+#menuErrorUl,
+#getMealError,
+#loginError,
+#errorUl,
+#guestErrorUl,
+#getBookingError {
+    list-style: none;
+    color: red;
+    text-align: center;
+    margin: 3% auto;
+}
+
+#errorUl {
+    margin: 0% auto;
+}
+
+#guestErrorUl {
+    margin-bottom: 0;
+}
+
 footer {
     display: flex;
     justify-content: center;
@@ -343,4 +368,41 @@ footer nav ul li,
 footer nav ul li a {
     text-decoration: none;
     color: white;
+}
+
+
+@media screen and (max-width: 1200px) {
+
+    #startHead {
+        font-size: 65px;
+    }
+
+    nav {
+        width: 50%;
+    }
+
+}
+
+@media screen and (max-width: 750px) {
+
+    #startHead {
+        font-size: 55px;
+    }
+
+    nav {
+        width: 65%;
+    }
+
+}
+
+@media screen and (max-width: 500px) {
+
+    #startHead {
+        font-size: 50px;
+    }
+
+    nav {
+        width: 85%;
+    }
+
 }

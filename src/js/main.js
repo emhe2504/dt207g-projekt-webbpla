@@ -452,7 +452,12 @@ async function registerAdmin(event) {
         if (!response.ok) {
             console.log(data.message);
 
+            const apiError = data.message;
+            const errorSpot = document.getElementById("regErrorP");
 
+            errorSpot.textContent = data.message;
+
+            return;
         }
 
         document.getElementById("regEmail").value = "";

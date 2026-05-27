@@ -37,7 +37,7 @@ async function addBooking(event) {
 
     //Felmeddelanden vid tomma inputfält
     const errors = [];
-    const errorSpot = document.getElementById("errorUl");
+    const errorSpot = document.getElementById("guestErrorUl");
     errorSpot.innerHTML = "";
 
     if (!addedEmail) { errors.push("Fyll i e-postadress") }

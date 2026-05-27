@@ -12,6 +12,8 @@ const changeBookingButton = document.getElementById("changeBookingButton");
 const ADupdateButton = document.getElementById("ADupdateButton");
 const deleteBookingButton = document.getElementById("deleteBookingButton");
 
+const adminRegistrationForm = document.getElementById("adminRegistrationForm");
+
 
 //Variabel för att lagra hämtad bokning lokalt
 let retrievedBooking = null;
@@ -41,6 +43,8 @@ function init() {
     if (deleteBookingButton) {
         deleteBookingButton.addEventListener("click", deleteBooking);
     }
+
+    if (adminRegistrationForm) { adminRegistrationForm.addEventListener("submit", registerAdmin); }
 }
 
 
@@ -358,5 +362,68 @@ async function deleteBooking() {
     } catch (error) {
         console.log(error);
     }
+
+}
+
+
+//Registrera konto för anställd
+async function registerAdmin() {
+
+    event.preventDefault(); //Inte ladda om sidan
+
+    //Värden från input
+    const registeredEmail = document.getElementById("regEmail").value;
+    const registeredPassword = document.getElementById("regPassword").value;
+
+    //Felmeddelanden vid tomma inputfält
+    const regErrors = [];
+    const errorSpot = document.getElementById("regErrorUl");
+    errorSpot.innerHTML = "";
+
+    if (!registeredEmail) {
+        regErrors.push("Ange E-postadress")
+    }
+    if (!registeredPassword) {
+        regErrors.push("Ange lösenord")
+    }
+    regErrors.forEach(error => {
+        const newLi = document.createElement("li");
+        newLi.textContent = error;
+        errorSpot.appendChild(newLi);
+    });
+
+    let employee = {
+        email: registeredEmail,
+        password: registeredPassword
+    }
+
+    try {
+
+        const response = await fetch("http://localhost:3001/employee/register", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(employee)
+        })
+
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            console.log(data.message);
+
+
+        }
+
+        document.getElementById("regEmail").value = "";
+        document.getElementById("regPassword").value = "";
+
+        document.getElementById("registrationConfirmation").classList.remove("is_hidden");
+        document.getElementById("registrationHead").textContent = "Konto registrerat!"
+
+    } catch (error) {
+    console.log(error);
+}
 
 }

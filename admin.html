@@ -25,7 +25,7 @@
     <nav id="adminMenu">
       <ul>
         <li><a href="admin.html#adminBookings">Hantera bordsbokningar</a></li>
-        <li><a href="register.html#regEmployee">Lägg till konto för anställd</a></li>
+        <li><a href="register.html#registerAdmin">Lägg till konto för anställd</a></li>
         <li><a href="menu.html#manageMenu">Hantera meny</a></li>
       </ul>
     </nav>
@@ -86,6 +86,33 @@
       </div>
 
     </section>
+
+
+    <section id="registerAdmin">
+      <h2>Registrera användare</h2>
+
+      <h2 id="addBooking">Lägg till konto för anställd:</h2>
+
+      <ul id="regErrorUl"></ul>
+      <form id="adminRegistrationForm">
+
+        <label for="regEmail">E-postadress: </label>
+        <input type="text" id="regEmail">
+
+        <label for="regPassword">Lösenord: </label>
+        <input type="text" id="regPassword">
+
+        <button type="submit" id="registrationButton">Skapa konto</button>
+      </form>
+
+      <div id="registrationConfirmation" class="is_hidden">
+        <h2 id="registrationHead"></h2>
+      </div>
+
+      </div>
+
+    </section>
+
 
   </main>
   <footer>

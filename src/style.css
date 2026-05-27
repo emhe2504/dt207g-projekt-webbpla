@@ -211,7 +211,8 @@ textarea {
 #ADupdateButton,
 #ADgetBookingButton,
 #changeBookingButton,
-#deleteBookingButton {
+#deleteBookingButton,
+#registrationButton {
     padding: 1.5%;
     border: 1px solid #6F4E37;
     background-color: #ECB176;
@@ -236,7 +237,8 @@ textarea {
 #loginButton:hover,
 #ADreservationButton:hover,
 #ADupdateButton:hover,
-#ADgetBookingButton:hover {
+#ADgetBookingButton:hover,
+#registrationButton:hover {
     background-color: #FED8B1;
 }
 
@@ -274,14 +276,16 @@ textarea {
     margin: 6% auto 0 auto;;
 }
 
-#adminBookings {
+#adminBookings,
+#registerAdmin {
     width: 60%;
     margin: 10% auto;
     border: 1px solid #6F4E37;
     padding: 1%;
 }
 
-#adminReservationForm {
+#adminReservationForm,
+#adminRegistrationForm {
     display: flex;
     flex-direction: column;
     width: 45%;

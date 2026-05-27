@@ -14,6 +14,9 @@ const deleteBookingButton = document.getElementById("deleteBookingButton");
 
 const adminRegistrationForm = document.getElementById("adminRegistrationForm");
 
+const adminMenuForm = document.getElementById("adminMenuForm");
+const menuConfirmation = document.getElementById("menuConfirmation");
+
 
 //Variabel för att lagra hämtad bokning lokalt
 let retrievedBooking = null;
@@ -45,6 +48,8 @@ function init() {
     }
 
     if (adminRegistrationForm) { adminRegistrationForm.addEventListener("submit", registerAdmin); }
+
+    if (adminMenuForm) { adminMenuForm.addEventListener("submit", addMeal); }
 }
 
 
@@ -423,7 +428,86 @@ async function registerAdmin() {
         document.getElementById("registrationHead").textContent = "Konto registrerat!"
 
     } catch (error) {
-    console.log(error);
+        console.log(error);
+    }
+
 }
 
+
+//Lägga till måltid i meny
+async function addMeal(event) {
+
+    event.preventDefault(); //Inte ladda om sidan
+
+    //Värden från input
+    const mealName = document.getElementById("mealName").value;
+    const mealDescription = document.getElementById("mealDescription").value;
+    const mealPrice = document.getElementById("mealPrice").value;
+    const mealType = document.getElementById("mealType").value;
+
+    //Felmeddelanden vid tomma inputfält
+    const errors = [];
+    const errorSpot = document.getElementById("menuErrorUl");
+    errorSpot.innerHTML = "";
+
+    if (!mealName) { errors.push("Fyll i måltidsnamn"); }
+    if (!mealDescription) { errors.push("Fyll i måltidsbeskrivning"); }
+    if (!mealPrice) { errors.push("Fyll i måltidspris"); }
+
+    if (errors.length > 0) {
+        errors.forEach(error => {
+            const newLi = document.createElement("li");
+            newLi.textContent = error;
+            errorSpot.appendChild(newLi);
+        });
+        return;
+    }
+
+    const meal = {
+        mealname: mealName,
+        mealdescription: mealDescription,
+        mealprice: mealPrice,
+        mealtype: mealType
+    }
+
+    const token = localStorage.getItem("Employee-token");
+
+    try {
+
+        const response = await fetch("http://localhost:3001/menu", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + token
+            },
+            body: JSON.stringify(meal)
+        })
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            console.log(data.message);
+            return;
+
+        }
+
+        console.log(data);
+
+        document.getElementById("mealName").value = "";
+        document.getElementById("mealDescription").value = "";
+        document.getElementById("mealPrice").value = "";
+
+        const id = data._id;
+
+        menuConfirmation.classList.remove("is_hidden");
+
+        const menuConfHead = document.getElementById("menuConfHead");
+        menuConfHead.textContent = `Måltid/dryck skapad!`;
+
+        const menuConfID = document.getElementById("menuConfID");
+        menuConfID.textContent = `MåltidsID/DryckID är: ${id}. (Spara denna!)`;
+
+    } catch (error) {
+        console.log(error);
+    }
 }

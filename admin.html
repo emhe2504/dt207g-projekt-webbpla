@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Estraden</title>
   <link rel="stylesheet" href="/src/style.css">
-  <script src="/src/authChecker.js"></script>
+  <script type="module" src="/src/authChecker.js"></script>
 </head>
 
 <body>
@@ -119,7 +119,7 @@
     <section id="manageMenu">
       <h2>Hantera meny</h2>
 
-      <h2 id="menuHead">Lägga till i meny:</h2>
+      <h2 id="menuHead">Lägga till måltid/dryck:</h2>
       <p id="menuNote">OBS! Det går även att lägga till dryck, lägg in den på samma sätt som måltider.</p>
 
       <ul id="menuErrorUl"></ul>
@@ -148,15 +148,15 @@
       </form>
 
       <div id="menuConfirmation" class="is_hidden">
-        <h2 id="ADconfirmationHead"></h2>
-        <p id="ADconfirmationID"></p>
+        <h2 id="menuConfHead"></h2>
+        <p id="menuConfID"></p>
       </div>
 
       <div id="viewMeal">
         <h2>Se, ändra eller radera måltid</h2>
         <p id="getMealError"></p>
         <form id="getMealForm">
-          <input type="text" id="getMealId" placeholder="Ange måltidsID">
+          <input type="text" id="getMealId" placeholder="Ange måltidsID/dryckID">
           <br>
           <button type="submit" id="getMealButton">Hämta måltid</button>
         </form>

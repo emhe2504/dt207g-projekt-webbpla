@@ -8,8 +8,8 @@ const getBookingAdmin = document.getElementById("getBookingAdmin");
 const adminResultDiv = document.getElementById("adminResultDiv");
 const adminResultSpot = document.getElementById("adminBookingResult");
 
-const changeBookingButton = document.getElementById("changeBookingButton");
 const ADupdateButton = document.getElementById("ADupdateButton");
+const changeBookingButton = document.getElementById("changeBookingButton");
 const deleteBookingButton = document.getElementById("deleteBookingButton");
 
 const adminRegistrationForm = document.getElementById("adminRegistrationForm");
@@ -19,6 +19,10 @@ const menuConfirmation = document.getElementById("menuConfirmation");
 const getMealForm = document.getElementById("getMealForm");
 const getMealDiv = document.getElementById("getMealDiv");
 const mealResult = document.getElementById("mealResult");
+
+const updateMenuButton = document.getElementById("updateMenuButton");
+const changeMenuButton = document.getElementById("changeMenuButton");
+const deleteMenuButton = document.getElementById("deleteMenuButton");
 
 
 //Variabler för att lagra hämtad bokning eller måltid lokalt
@@ -58,6 +62,19 @@ function init() {
     if (getMealForm) { getMealForm.addEventListener("submit", getOneMeal); }
     if (getMealDiv) { getMealDiv.classList.add("is_hidden"); }
     if (mealResult) { mealResult.classList.add("is_hidden"); }
+
+
+    if (updateMenuButton) {
+        updateMenuButton.addEventListener("click", updateMeal);
+    }
+
+    if (changeMealButton) {
+        changeMealButton.addEventListener("click", changeMeal);
+    }
+
+    if (deleteMealButton) {
+        deleteMealButton.addEventListener("click", deleteMeal);
+    }
 }
 
 
@@ -380,7 +397,7 @@ async function deleteBooking() {
 
 
 //Registrera konto för anställd
-async function registerAdmin() {
+async function registerAdmin(event) {
 
     event.preventDefault(); //Inte ladda om sidan
 
@@ -513,12 +530,13 @@ async function addMeal(event) {
         menuConfHead.textContent = `Måltid/dryck skapad!`;
 
         const menuConfID = document.getElementById("menuConfID");
-        menuConfID.textContent = `MåltidsID/DryckID är: ${id}. (Spara denna!)`;
+        menuConfID.textContent = `MåltidsID/DryckID är: ${id} (Spara denna!)`;
 
     } catch (error) {
         console.log(error);
     }
 }
+
 
 //Hämta en måltid via id 
 async function getOneMeal(event) {
@@ -582,4 +600,150 @@ async function getOneMeal(event) {
     } catch (error) {
         console.log(error);
     }
+}
+
+
+//Ändra en måltid
+function changeMeal() {
+
+    if (!retrievedMeal) return; //Return - om ej GET gjorts, måltid hämtad, ingen data
+
+    //Sätta alla värden från hämtad bokning tillbaka i formulär
+    document.getElementById("mealName").value = retrievedMeal.mealname;
+    document.getElementById("mealDescription").value = retrievedMeal.mealdescription;
+    document.getElementById("mealPrice").value = retrievedMeal.mealprice;
+    document.getElementById("mealType").value = retrievedMeal.mealtype;
+
+    document.getElementById("adminMenuForm").scrollIntoView();
+
+
+    updateMenuButton.classList.remove("is_hidden");
+}
+
+
+
+//Fortsättning, uppdatera bokning
+async function updateMeal() {
+
+    //Värden från input
+    const mealName = document.getElementById("mealName").value;
+    const mealDescription = document.getElementById("mealDescription").value;
+    const mealPrice = document.getElementById("mealPrice").value;
+    const mealType = document.getElementById("mealType").value;
+
+    //Felmeddelanden vid tomma inputfält
+    const errors = [];
+    const errorSpot = document.getElementById("menuErrorUl");
+    errorSpot.innerHTML = "";
+
+    if (!mealName) { errors.push("Fyll i måltidsnamn"); }
+    if (!mealDescription) { errors.push("Fyll i måltidsbeskrivning"); }
+    if (!mealPrice) { errors.push("Fyll i måltidspris"); }
+
+    if (errors.length > 0) {
+        errors.forEach(error => {
+            const newLi = document.createElement("li");
+            newLi.textContent = error;
+            errorSpot.appendChild(newLi);
+        });
+        return;
+    }
+
+    const meal = {
+        mealname: mealName,
+        mealdescription: mealDescription,
+        mealprice: mealPrice,
+        mealtype: mealType
+    }
+
+    const token = localStorage.getItem("Employee-token");
+    const id = retrievedMeal._id;
+
+    try {
+
+        const response = await fetch(`http://localhost:3001/menu/${id}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + token
+            },
+            body: JSON.stringify(meal)
+        })
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            console.log(data.message);
+            return;
+
+        }
+
+        console.log(data);
+
+        document.getElementById("mealName").value = "";
+        document.getElementById("mealDescription").value = "";
+        document.getElementById("mealPrice").value = "";
+
+        getMealDiv.classList.add("is_hidden");
+        updateMenuButton.classList.add("is_hidden");
+
+
+        menuConfirmation.classList.remove("is_hidden");
+
+        const menuConfHead = document.getElementById("menuConfHead");
+        menuConfHead.textContent = `Måltid uppdaterad!`;
+
+        const menuConfID = document.getElementById("menuConfID");
+        menuConfID.textContent = `Måltid uppdaterad, men behåller samma måltidsID eller dryckID!`;
+
+    } catch (error) {
+        console.log(error);
+    }
+
+}
+
+//Radera bokning
+async function deleteMeal() {
+
+    if (!retrievedMeal) return;  //Return - om ej GET gjorts, ingen måltid hämtad, ingen data
+
+    const token = localStorage.getItem("Employee-token");
+    const id = retrievedMeal._id;
+
+    try {
+
+        const response = await fetch(`http://localhost:3001/menu/${id}`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + token
+            }
+        })
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            console.log(data.message);
+            return;
+
+        }
+
+        console.log(data);
+        retrievedMeal = null; //Data "tömd" igen när den är raderad
+
+        //Rensa dölja gammal måltidsinformation
+        mealResult.innerHTML = "";
+        getMealDiv.classList.add("is_hidden");
+
+        //Bekräftelse på radering
+        menuConfirmation.classList.remove("is_hidden");
+        const menuConfHead = document.getElementById("menuConfHead");
+        menuConfHead.textContent = `Måltid raderad!`;
+        const menuConfID = document.getElementById("menuConfID");
+        menuConfID.textContent = "";
+
+    } catch (error) {
+        console.log(error);
+    }
+
 }

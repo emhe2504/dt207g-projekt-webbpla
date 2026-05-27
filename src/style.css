@@ -210,7 +210,8 @@ textarea {
 #ADreservationButton,
 #ADupdateButton,
 #ADgetBookingButton,
-#changeBookingButton {
+#changeBookingButton,
+#deleteBookingButton {
     padding: 1.5%;
     border: 1px solid #6F4E37;
     background-color: #ECB176;
@@ -221,6 +222,12 @@ textarea {
 #changeBookingButton {
     padding: 0.5%;
     margin: 5% 0 0 2%;
+    width: 23%;
+}
+
+#deleteBookingButton {
+    padding: 0.5%;
+    margin: 2% 0 0 2%;
     width: 23%;
 }
 

@@ -22,6 +22,7 @@ const adminResultSpot = document.getElementById("adminBookingResult");
 
 const changeBookingButton = document.getElementById("changeBookingButton");
 const ADupdateButton = document.getElementById("ADupdateButton");
+const deleteBookingButton = document.getElementById("deleteBookingButton");
 
 //Variabel för att lagra hämtad bokning lokalt (för att ändra och radera)
 let retrievedBooking = null;
@@ -51,17 +52,14 @@ function init() {
 
     if (changeBookingButton) {
         changeBookingButton.addEventListener("click", changeBooking);
+    }
 
-        if (ADupdateButton) {
-            ADupdateButton.addEventListener("click", updateBooking);
-        }
+    if (ADupdateButton) {
+        ADupdateButton.addEventListener("click", updateBooking);
+    }
 
-        //När anställd trycker på skärmen försvinner bekräftelser
-        document.addEventListener("click", () => {
-            if (adminBookingConfirmation) { adminBookingConfirmation.classList.add("is_hidden"); }
-            if (adminResultDiv) { adminResultDiv.classList.add("is_hidden"); }
-            if (adminResultSpot) { adminResultSpot.classList.add("is_hidden"); }
-        })
+    if (deleteBookingButton) {
+        deleteBookingButton.addEventListener("click", deleteBooking);
     }
 }
 
@@ -503,8 +501,8 @@ async function getOneAdminBooking(event) {
 //Ändra en bokning (för anställda)
 function changeBooking() {
 
-    if (!retrievedBooking) return; //Return - om ej GET gjorts ovan, ingen bokning hämtad, ingen data
-    
+    if (!retrievedBooking) return; //Return - om ej GET gjorts, ingen bokning hämtad, ingen data
+
     const fixedDate = retrievedBooking.date.split("T")[0];  //Rätt datumformat för värdet ska passa i form (date)
     const fixedTime = retrievedBooking.time.replace(".", ":"); //Byta punkt till kolon för värdet ska passa i form (time)
 
@@ -602,6 +600,51 @@ async function updateBooking() {
 
         const confirmationID = document.getElementById("ADconfirmationID");
         confirmationID.textContent = `Bokning uppdaterad, men behåller samma bokningsID!`;
+
+    } catch (error) {
+        console.log(error);
+    }
+
+}
+
+async function deleteBooking() {
+
+    if (!retrievedBooking) return;  //Return - om ej GET gjorts, ingen bokning hämtad, ingen data
+
+    const token = localStorage.getItem("Employee-token");
+    const id = retrievedBooking._id;
+
+    try {
+
+        const response = await fetch(`http://localhost:3001/employeereservation/${id}`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + token
+            }
+        })
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            console.log(data.message);
+            return;
+
+        }
+
+        console.log(data);
+        retrievedBooking = null; //Data "tömd" igen när den är raderad
+
+        //Rensa dölja gammal bokningsinformation
+        adminResultSpot.innerHTML = "";
+        adminResultDiv.classList.add("is_hidden");
+
+        //Bekräftelse på radering
+        adminBookingConfirmation.classList.remove("is_hidden");
+        const confirmationHead = document.getElementById("ADconfirmationHead");
+        confirmationHead.textContent = `Bokning raderad!`;
+        const confirmationID = document.getElementById("ADconfirmationID");
+        confirmationID.textContent = "";
 
     } catch (error) {
         console.log(error);

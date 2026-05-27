@@ -216,7 +216,9 @@ select {
 #deleteBookingButton,
 #registrationButton,
 #addMenuButton,
-#getMealButton {
+#getMealButton,
+#changeMealButton,
+#deleteMealButton {
     padding: 1.5%;
     border: 1px solid #6F4E37;
     background-color: #ECB176;
@@ -253,7 +255,8 @@ select {
 #confirmation,
 #bookingResult,
 #adminResultDiv,
-#adminConfirmation {
+#adminConfirmation,
+#getMealDiv {
     width: 55%;
     margin: 6% auto;
     border: 1px solid #6F4E37;

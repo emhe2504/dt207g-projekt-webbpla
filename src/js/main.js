@@ -16,11 +16,14 @@ const adminRegistrationForm = document.getElementById("adminRegistrationForm");
 
 const adminMenuForm = document.getElementById("adminMenuForm");
 const menuConfirmation = document.getElementById("menuConfirmation");
+const getMealForm = document.getElementById("getMealForm");
+const getMealDiv = document.getElementById("getMealDiv");
+const mealResult = document.getElementById("mealResult");
 
 
-//Variabel för att lagra hämtad bokning lokalt
+//Variabler för att lagra hämtad bokning eller måltid lokalt
 let retrievedBooking = null;
-
+let retrievedMeal = null;
 
 
 window.addEventListener("DOMContentLoaded", init);
@@ -50,6 +53,11 @@ function init() {
     if (adminRegistrationForm) { adminRegistrationForm.addEventListener("submit", registerAdmin); }
 
     if (adminMenuForm) { adminMenuForm.addEventListener("submit", addMeal); }
+    if (menuConfirmation) { menuConfirmation.classList.add("is_hidden"); }
+
+    if (getMealForm) { getMealForm.addEventListener("submit", getOneMeal); }
+    if (getMealDiv) { getMealDiv.classList.add("is_hidden"); }
+    if (mealResult) { mealResult.classList.add("is_hidden"); }
 }
 
 
@@ -197,7 +205,7 @@ async function getOneAdminBooking(event) {
 
             adminResultSpot.innerHTML += `
                 <article>
-                <h3>BokningsID: ${data._id}</h3>
+                <h2>BokningsID: ${data._id}</h2>
                 <p><strong>Email:</strong> ${data.email}</p>
                 <p><strong>Telefonnummer:</strong> ${data.phonenumber}</p>
                 <p><strong>Datum:</strong> ${fixedDate}</p>
@@ -506,6 +514,70 @@ async function addMeal(event) {
 
         const menuConfID = document.getElementById("menuConfID");
         menuConfID.textContent = `MåltidsID/DryckID är: ${id}. (Spara denna!)`;
+
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+//Hämta en måltid via id 
+async function getOneMeal(event) {
+
+    event.preventDefault(); //Inte ladda om sidan
+    menuConfirmation.classList.add("is_hidden");
+
+    //Värden från input
+    const addedID = document.getElementById("getMealId").value;
+
+    //Felmeddelanden vid tomma inputfält
+    const errorSpot = document.getElementById("getMealError");
+    errorSpot.textContent = "";
+
+    if (!addedID) {
+        errorSpot.textContent = "Ange bokningsID eller dryckID";
+        return;
+    }
+
+    const token = localStorage.getItem("Employee-token");
+
+    try {
+
+        const response = await fetch(`http://localhost:3001/menu/${addedID}`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + token
+            }
+        })
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            console.log(data.message);
+            errorSpot.textContent = `${data.message}`;
+            return;
+
+        }
+
+        retrievedMeal = data; //Lägga till data i den lokala varibeln för aktuell hämtad måltid
+
+        document.getElementById("getMealId").value = "";
+
+        if (getMealDiv) {
+
+            getMealDiv.classList.remove("is_hidden");
+            mealResult.classList.remove("is_hidden");
+            mealResult.innerHTML = "";
+
+            mealResult.innerHTML += `
+                <article>
+                <h2>MåltidsID eller dryckID: ${data._id}</h2>
+                <p><strong>Måltidsnamn:</strong> ${data.mealname}</p>
+                <p><strong>Måltidsbeskrivning:</strong> ${data.mealdescription}</p>
+                <p><strong>Måltidspris:</strong> ${data.mealprice}</p>
+                <p><strong>Typ:</strong> ${data.mealtype}</p>
+                </article>`
+        }
 
     } catch (error) {
         console.log(error);

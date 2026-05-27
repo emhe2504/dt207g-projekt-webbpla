@@ -25,12 +25,12 @@
     <nav id="adminMenu">
       <ul>
         <li><a href="admin.html#adminBookings">Hantera bordsbokningar</a></li>
-        <li><a href="register.html#registerAdmin">Lägg till konto för anställd</a></li>
-        <li><a href="menu.html#manageMenu">Hantera meny</a></li>
+        <li><a href="admin.html#registerAdmin">Lägg till konto för anställd</a></li>
+        <li><a href="admin.html#manageMenu">Hantera meny</a></li>
       </ul>
     </nav>
 
-
+    <!--Section för hantering av bokningar-->
     <section id="adminBookings">
       <h2>Hantera bordsbokningar</h2>
 
@@ -87,11 +87,12 @@
 
     </section>
 
-
+    <!--Section för registrering av adminkonto-->
     <section id="registerAdmin">
+
       <h2>Registrera användare</h2>
 
-      <h2 id="addBooking">Lägg till konto för anställd:</h2>
+      <h2 id="registrationHead">Lägg till konto för anställd:</h2>
 
       <ul id="regErrorUl"></ul>
       <form id="adminRegistrationForm">
@@ -108,6 +109,64 @@
       <div id="registrationConfirmation" class="is_hidden">
         <h2 id="registrationHead"></h2>
       </div>
+
+      </div>
+
+    </section>
+
+
+    <!--Section för hantering av meny-->
+    <section id="manageMenu">
+      <h2>Hantera meny</h2>
+
+      <h2 id="menuHead">Lägga till i meny:</h2>
+      <p id="menuNote">OBS! Det går även att lägga till dryck, lägg in den på samma sätt som måltider.</p>
+
+      <ul id="menuErrorUl"></ul>
+      <form id="adminMenuForm">
+
+        <label for="mealName">Måltidsnamn: </label>
+        <input type="text" id="mealName">
+
+        <label for="mealDescription">Måltidsbeskrivning: </label>
+        <input type="text" id="mealDescription">
+
+        <label for="mealPrice">Måltidspris:</label>
+        <input type="text" id="mealPrice">
+
+        <label for="mealType">Måltidstyp:</label>
+        <select id="mealType">
+          <option value="Starter">Förrätt</option>
+          <option value="Main">Huvudrätt</option>
+          <option value="Dessert">Efterrätt</option>
+          <option value="Beverage">Dryck</option>
+        </select>
+
+        <button type="submit" id="addMenuButton">Addera måltid</button>
+        <br>
+        <button type="button" id="updateMenuButton" class="is_hidden">Uppdatera måltid</button>
+      </form>
+
+      <div id="menuConfirmation" class="is_hidden">
+        <h2 id="ADconfirmationHead"></h2>
+        <p id="ADconfirmationID"></p>
+      </div>
+
+      <div id="viewMeal">
+        <h2>Se, ändra eller radera måltid</h2>
+        <p id="getMealError"></p>
+        <form id="getMealForm">
+          <input type="text" id="getMealId" placeholder="Ange måltidsID">
+          <br>
+          <button type="submit" id="getMealButton">Hämta måltid</button>
+        </form>
+
+        <div id="getMealDiv">
+          <div id="mealResult"></div>
+          <button type="button" id="changeMealButton">Ändra måltid</button>
+          <br>
+          <button type="button" id="deleteMealButton">Radera måltid</button>
+        </div>
 
       </div>
 

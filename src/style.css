@@ -184,7 +184,8 @@ h3 {
     margin: 2% auto 5%;
 }
 
-#getBookingAdmin {
+#getBookingAdmin,
+#getMealForm {
     display: flex;
     flex-direction: column;
     width: 45%;
@@ -198,7 +199,8 @@ input[type="text"],
 input[type="date"],
 input[type="time"],
 input[type="number"],
-textarea {
+textarea,
+select {
     margin-bottom: 5%;
     padding: 1%;
     border: 1px solid #6F4E37;
@@ -212,7 +214,9 @@ textarea {
 #ADgetBookingButton,
 #changeBookingButton,
 #deleteBookingButton,
-#registrationButton {
+#registrationButton,
+#addMenuButton,
+#getMealButton {
     padding: 1.5%;
     border: 1px solid #6F4E37;
     background-color: #ECB176;
@@ -220,13 +224,15 @@ textarea {
     border-radius: 5px;
 }
 
-#changeBookingButton {
+#changeBookingButton,
+#changeMealButton {
     padding: 0.5%;
     margin: 5% 0 0 2%;
     width: 23%;
 }
 
-#deleteBookingButton {
+#deleteBookingButton,
+#deleteMealButton {
     padding: 0.5%;
     margin: 2% 0 0 2%;
     width: 23%;
@@ -238,7 +244,9 @@ textarea {
 #ADreservationButton:hover,
 #ADupdateButton:hover,
 #ADgetBookingButton:hover,
-#registrationButton:hover {
+#registrationButton:hover,
+#addMenuButton:hover,
+#getMealButton:hover {
     background-color: #FED8B1;
 }
 
@@ -253,7 +261,8 @@ textarea {
     background-color: white;
 }
 
-#adminResultDiv {
+#adminResultDiv,
+#getMealDiv {
     width: 65%;
     margin-bottom: 1%;
 }
@@ -272,12 +281,20 @@ textarea {
 }
 
 #addBooking,
-#viewBooking {
-    margin: 6% auto 0 auto;;
+#viewBooking,
+#registrationHead,
+#menuHead,
+#viewMeal {
+    margin: 6% auto 0 auto;
+}
+
+#menuNote {
+    margin: 2% auto 4% auto;
 }
 
 #adminBookings,
-#registerAdmin {
+#registerAdmin,
+#manageMenu {
     width: 60%;
     margin: 10% auto;
     border: 1px solid #6F4E37;
@@ -285,7 +302,8 @@ textarea {
 }
 
 #adminReservationForm,
-#adminRegistrationForm {
+#adminRegistrationForm,
+#adminMenuForm {
     display: flex;
     flex-direction: column;
     width: 45%;

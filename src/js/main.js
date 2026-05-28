@@ -269,6 +269,7 @@ function changeBooking() {
     ADupdateButton.classList.remove("is_hidden");
 }
 
+
 //Fortsättning, uppdatera bokning
 async function updateBooking() {
 
@@ -357,6 +358,7 @@ async function updateBooking() {
     }
 
 }
+
 
 //Radera bokning
 async function deleteBooking() {
@@ -636,7 +638,7 @@ function changeMeal() {
 
 
 
-//Fortsättning, uppdatera bokning
+//Fortsättning, uppdatera måltid
 async function updateMeal() {
 
     //Värden från input
@@ -716,7 +718,7 @@ async function updateMeal() {
 
 }
 
-//Radera bokning
+//Radera måltid
 async function deleteMeal() {
 
     if (!retrievedMeal) return;  //Return - om ej GET gjorts, ingen måltid hämtad, ingen data

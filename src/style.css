@@ -585,6 +585,14 @@ footer nav ul li a {
         font-size: 12px;
     }
 
+    h2 {
+        font-size: 15px;
+    }
+
+    #startHead {
+        font-size: 52px;
+    }
+
     #guestMenu li a {
         font-size: 14px;
     }

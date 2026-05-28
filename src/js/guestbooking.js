@@ -13,7 +13,7 @@ function init() {
 
     if (reservationForm) { reservationForm.addEventListener("submit", addBooking); }
     if (getBookingForm) { getBookingForm.addEventListener("submit", getOneBooking); }
-    
+
     if (bookingConfirmation) { bookingConfirmation.classList.add("is_hidden"); }
     if (resultSpot) { resultSpot.classList.add("is_hidden"); }
 }

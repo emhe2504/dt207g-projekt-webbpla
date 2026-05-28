@@ -8,6 +8,8 @@ const getBookingAdmin = document.getElementById("getBookingAdmin");
 const adminResultDiv = document.getElementById("adminResultDiv");
 const adminResultSpot = document.getElementById("adminBookingResult");
 
+const allBookings = document.getElementById("allBookings");
+
 const ADupdateButton = document.getElementById("ADupdateButton");
 const changeBookingButton = document.getElementById("changeBookingButton");
 const deleteBookingButton = document.getElementById("deleteBookingButton");
@@ -21,8 +23,8 @@ const getMealDiv = document.getElementById("getMealDiv");
 const mealResult = document.getElementById("mealResult");
 
 const updateMenuButton = document.getElementById("updateMenuButton");
-const changeMenuButton = document.getElementById("changeMenuButton");
-const deleteMenuButton = document.getElementById("deleteMenuButton");
+const changeMealButton = document.getElementById("changeMealButton");
+const deleteMealButton = document.getElementById("deleteMealButton");
 
 const logOutButton = document.getElementById("logOutButton");
 
@@ -34,59 +36,53 @@ let retrievedMeal = null;
 
 window.addEventListener("DOMContentLoaded", init);
 
-function init() {
+async function init() {
 
 
-    if (adminReservationForm) { adminReservationForm.addEventListener("submit", addAdminBooking); }
-    if (adminBookingConfirmation) { adminBookingConfirmation.classList.add("is_hidden"); }
+    adminReservationForm.addEventListener("submit", addAdminBooking);
+    adminBookingConfirmation.classList.add("is_hidden");
 
-    if (getBookingAdmin) { getBookingAdmin.addEventListener("submit", getOneAdminBooking); }
-    if (adminResultDiv) { adminResultDiv.classList.add("is_hidden"); }
-    if (adminResultSpot) { adminResultSpot.classList.add("is_hidden"); }
+    getBookingAdmin.addEventListener("submit", getOneAdminBooking);
+    adminResultDiv.classList.add("is_hidden");
+    adminResultSpot.classList.add("is_hidden");
 
-    if (changeBookingButton) {
-        changeBookingButton.addEventListener("click", changeBooking);
-    }
+    changeBookingButton.addEventListener("click", changeBooking);
 
-    if (ADupdateButton) {
-        ADupdateButton.addEventListener("click", updateBooking);
-    }
+    ADupdateButton.addEventListener("click", updateBooking);
 
-    if (deleteBookingButton) {
-        deleteBookingButton.addEventListener("click", deleteBooking);
-    }
+    deleteBookingButton.addEventListener("click", deleteBooking);
 
-    if (adminRegistrationForm) { adminRegistrationForm.addEventListener("submit", registerAdmin); }
+    adminRegistrationForm.addEventListener("submit", registerAdmin);
 
-    if (adminMenuForm) { adminMenuForm.addEventListener("submit", addMeal); }
-    if (menuConfirmation) { menuConfirmation.classList.add("is_hidden"); }
+    adminMenuForm.addEventListener("submit", addMeal);
+    menuConfirmation.classList.add("is_hidden");
 
-    if (getMealForm) { getMealForm.addEventListener("submit", getOneMeal); }
-    if (getMealDiv) { getMealDiv.classList.add("is_hidden"); }
-    if (mealResult) { mealResult.classList.add("is_hidden"); }
+    getMealForm.addEventListener("submit", getOneMeal);
+    getMealDiv.classList.add("is_hidden");
+    mealResult.classList.add("is_hidden");
 
+    updateMenuButton.addEventListener("click", updateMeal);
+    changeMealButton.addEventListener("click", changeMeal);
+    deleteMealButton.addEventListener("click", deleteMeal);
 
-    if (updateMenuButton) {
-        updateMenuButton.addEventListener("click", updateMeal);
-    }
+    logOutButton.addEventListener("click", () => {
+        localStorage.removeItem("Employee-token");
+        window.location.href = "employeelogin.html";
+    });
 
-    if (changeMealButton) {
-        changeMealButton.addEventListener("click", changeMeal);
-    }
-
-    if (deleteMealButton) {
-        deleteMealButton.addEventListener("click", deleteMeal);
-    }
-
-    if (logOutButton) {
-        logOutButton.addEventListener("click", () => {
-            localStorage.removeItem("Employee-token");
-            window.location.href = "employeelogin.html";
-        })
-    }
+    await getAllBookings();
 }
 
+//Kontrollera behörighet/utgången token
+function expiredToken(response) {
+    if (response.status === 401 || response.status === 403) {
+        localStorage.removeItem("Employee-token");
+        window.location.href = "employeelogin.html";
+        return true;    //Om token expired (eller obehörig), returneras true
+    }
 
+    return false;       //Annars false
+}
 
 //Lägga till bokning 
 async function addAdminBooking(event) {
@@ -143,6 +139,8 @@ async function addAdminBooking(event) {
             body: JSON.stringify(booking)
         })
 
+        if (expiredToken(response)) return;
+
         const data = await response.json();
 
         if (!response.ok) {
@@ -169,6 +167,8 @@ async function addAdminBooking(event) {
 
         const confirmationID = document.getElementById("ADconfirmationID");
         confirmationID.textContent = `BokningsID är: ${id}`;
+
+        await getAllBookings();
 
     } catch (error) {
         console.log(error);
@@ -207,6 +207,8 @@ async function getOneAdminBooking(event) {
             }
         })
 
+        if (expiredToken(response)) return;
+
         const data = await response.json();
 
         if (!response.ok) {
@@ -223,13 +225,11 @@ async function getOneAdminBooking(event) {
 
         document.getElementById("ADbookingId").value = "";
 
-        if (adminResultDiv) {
+        adminResultDiv.classList.remove("is_hidden");
+        adminResultSpot.classList.remove("is_hidden");
+        adminResultSpot.innerHTML = "";
 
-            adminResultDiv.classList.remove("is_hidden");
-            adminResultSpot.classList.remove("is_hidden");
-            adminResultSpot.innerHTML = "";
-
-            adminResultSpot.innerHTML += `
+        adminResultSpot.innerHTML += `
                 <article>
                 <h2>BokningsID: ${data._id}</h2>
                 <p><strong>Email:</strong> ${data.email}</p>
@@ -239,7 +239,84 @@ async function getOneAdminBooking(event) {
                 <p><strong>Antal personer:</strong> ${data.people}</p>
                 <p><strong>Kommentar:</strong> ${data.comment}</p>
                 </article>`
+
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+
+//Hämta alla bokningar 
+async function getAllBookings() {
+
+    const token = localStorage.getItem("Employee-token");
+
+    try {
+
+        const response = await fetch(`http://localhost:3001/employeereservation`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + token
+            }
+        })
+
+        if (expiredToken(response)) return;
+
+        const data = await response.json();
+
+        const allBookingsSpot = document.getElementById("allBookingsResult");
+        allBookingsSpot.innerHTML = "";
+
+        if (!response.ok) {
+            console.log(data.message);
+            allBookingsSpot.textContent = "Kunde inte hämta bokningar.";
+            return;
+
         }
+
+        data.forEach(booking => {
+
+            const date = booking.date;
+            const fixedDate = new Date(date).toLocaleDateString('sv-SE');
+
+            const bookingUl = document.createElement("ul");
+
+            const idLi = document.createElement("li");
+            idLi.textContent = booking._id;
+
+            const emailLi = document.createElement("li");
+            emailLi.textContent = booking.email;
+
+            const phonenumberLi = document.createElement("li");
+            phonenumberLi.textContent = booking.phonenumber;
+
+            const dateLi = document.createElement("li");
+            dateLi.textContent = fixedDate;
+
+            const timeLi = document.createElement("li");
+            timeLi.textContent = booking.time;
+
+            const peopleLi = document.createElement("li");
+            peopleLi.textContent = `Antal personer: ${booking.people}`;
+
+            const commentLi = document.createElement("li");
+            commentLi.textContent = `Kommentar: ${booking.comment}`;
+
+            allBookingsSpot.appendChild(bookingUl);
+            bookingUl.append(
+                idLi,
+                emailLi,
+                phonenumberLi,
+                dateLi,
+                timeLi,
+                peopleLi,
+                commentLi
+            );
+
+            bookingUl.classList.add("booking-list");
+
+        });
 
     } catch (error) {
         console.log(error);
@@ -324,6 +401,8 @@ async function updateBooking() {
             body: JSON.stringify(booking)
         })
 
+        if (expiredToken(response)) return;
+
         const data = await response.json();
 
         if (!response.ok) {
@@ -353,6 +432,8 @@ async function updateBooking() {
         const confirmationID = document.getElementById("ADconfirmationID");
         confirmationID.textContent = `Bokning uppdaterad, men behåller samma bokningsID!`;
 
+        await getAllBookings();
+
     } catch (error) {
         console.log(error);
     }
@@ -378,6 +459,8 @@ async function deleteBooking() {
             }
         })
 
+        if (expiredToken(response)) return;
+
         const data = await response.json();
 
         if (!response.ok) {
@@ -399,6 +482,8 @@ async function deleteBooking() {
         confirmationHead.textContent = `Bokning raderad!`;
         const confirmationID = document.getElementById("ADconfirmationID");
         confirmationID.textContent = "";
+
+        await getAllBookings();
 
     } catch (error) {
         console.log(error);
@@ -427,11 +512,16 @@ async function registerAdmin(event) {
     if (!registeredPassword) {
         regErrors.push("Ange lösenord")
     }
-    regErrors.forEach(error => {
-        const newLi = document.createElement("li");
-        newLi.textContent = error;
-        errorSpot.appendChild(newLi);
-    });
+
+    if (regErrors.length > 0) {
+        regErrors.forEach(error => {
+            const newLi = document.createElement("li");
+            newLi.textContent = error;
+            errorSpot.appendChild(newLi);
+        });
+
+        return;
+    }
 
     let employee = {
         email: registeredEmail,
@@ -454,7 +544,6 @@ async function registerAdmin(event) {
         if (!response.ok) {
             console.log(data.message);
 
-            const apiError = data.message;
             const errorSpot = document.getElementById("regErrorP");
 
             errorSpot.textContent = data.message;
@@ -524,6 +613,8 @@ async function addMeal(event) {
             body: JSON.stringify(meal)
         })
 
+        if (expiredToken(response)) return;
+
         const data = await response.json();
 
         if (!response.ok) {
@@ -584,6 +675,8 @@ async function getOneMeal(event) {
             }
         })
 
+        if (expiredToken(response)) return;
+
         const data = await response.json();
 
         if (!response.ok) {
@@ -597,13 +690,11 @@ async function getOneMeal(event) {
 
         document.getElementById("getMealId").value = "";
 
-        if (getMealDiv) {
+        getMealDiv.classList.remove("is_hidden");
+        mealResult.classList.remove("is_hidden");
+        mealResult.innerHTML = "";
 
-            getMealDiv.classList.remove("is_hidden");
-            mealResult.classList.remove("is_hidden");
-            mealResult.innerHTML = "";
-
-            mealResult.innerHTML += `
+        mealResult.innerHTML += `
                 <article>
                 <h2>MåltidsID eller dryckID: ${data._id}</h2>
                 <p><strong>Måltidsnamn:</strong> ${data.mealname}</p>
@@ -611,7 +702,6 @@ async function getOneMeal(event) {
                 <p><strong>Måltidspris:</strong> ${data.mealprice}</p>
                 <p><strong>Typ:</strong> ${data.mealtype}</p>
                 </article>`
-        }
 
     } catch (error) {
         console.log(error);
@@ -686,6 +776,8 @@ async function updateMeal() {
             body: JSON.stringify(meal)
         })
 
+        if (expiredToken(response)) return;
+
         const data = await response.json();
 
         if (!response.ok) {
@@ -735,6 +827,8 @@ async function deleteMeal() {
                 "Authorization": "Bearer " + token
             }
         })
+
+        if (expiredToken(response)) return;
 
         const data = await response.json();
 

@@ -275,6 +275,18 @@ select {
     background-color: #FED8B1;
 }
 
+.booking-list {
+    line-height: 2em;
+    list-style: none;
+    padding: 0;
+    margin-bottom: 3%;
+    font-size: 12px;
+}
+
+.booking-list li:first-child {
+    font-weight: bold;
+}
+
 #confirmation,
 #bookingResult,
 #adminResultDiv,

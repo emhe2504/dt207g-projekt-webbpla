@@ -6,11 +6,11 @@ export default defineConfig({
         rollupOptions: {
             input: {
                 start: resolve(__dirname, "index.html"),
-                gueststart: resolve(__dirname, "index.html"),
-                guestbooking: resolve(__dirname, "gueststart.html"),
+                gueststart: resolve(__dirname, "gueststart.html"),
+                guestbooking: resolve(__dirname, "guestbooking.html"),
                 menu: resolve(__dirname, "menu.html"),
                 employeelogin: resolve(__dirname, "employeelogin.html"),
-                employeebooking: resolve(__dirname, "employeebooking.html")
+                admin: resolve(__dirname, "admin.html")
             }
         }
     },

@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="sv">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Estraden</title>
+  <link rel="icon" type="image/x-icon" sizes="16x16" href="/faviconLiten.ico">
+  <link rel="icon" type="image/x-icon" sizes="32x32" href="/faviconStor.ico">
+  <link rel="stylesheet" href="/src/style.css">
+</head>
+
+<body>
+  <header>
+    <picture>
+      <source srcset="estradenMat2.webp" type="image/webp">
+      <img src="estradenMat2.jpg" id="headerBild" alt="Dukade bord på restaurang">
+    </picture>
+  </header>
+  <main>
+
+    <h1>Logga in</h1>
+
+    <p id="loginError"></p>
+    <ul id="errorUl"></ul>
+    <form action="post" id="loginForm">
+
+      <label for="email">E-postadress: </label>
+      <input type="text" id="email">
+
+      <label for="password">Lösenord: </label>
+      <input type="text" id="password">
+
+      <button type="submit" id="loginButton">Logga in</button>
+    </form>
+
+  </main>
+  <footer>
+    <nav>
+      <ul id="footerList">
+        <li>Integritet</li>
+        <li>Arbeta i vårt team</li>
+        <li><a href="/gueststart.html#aboutUs">Om oss</a></li>
+      </ul>
+    </nav>
+  </footer>
+  <script type="module" src="/src/js/login.js"></script>
+</body>
+
+</html>

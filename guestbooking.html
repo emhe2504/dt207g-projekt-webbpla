@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="sv">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Estraden</title>
+  <link rel="icon" type="image/x-icon" sizes="16x16" href="/faviconLiten.ico">
+  <link rel="icon" type="image/x-icon" sizes="32x32" href="/faviconStor.ico">
+  <link rel="stylesheet" href="/src/style.css">
+</head>
+
+<body>
+  <header>
+    <picture>
+      <source srcset="estradenMat2.webp" type="image/webp">
+      <img src="estradenMat2.jpg" id="headerBild" alt="Dukade bord på restaurang">
+    </picture>
+  </header>
+  <main>
+
+    <nav id="guestNav">
+      <ul id="guestMenu">
+        <li><a href="/gueststart.html">Startsida</a></li>
+        <li><a href="/menu.html">Meny</a></li>
+        <li><a href="/gueststart.html#findUs">Kontakt</a></li>
+      </ul>
+    </nav>
+
+    <h1>Boka bord</h1>
+    <p>Kul att du vill boka bord hos oss!</p>
+    <br>
+    <p>Du kan antingen boka via formuläret här nedanför eller ringa och boka ett bord
+      på telefonnummer 08 - 555 00 88.</p>
+
+    <ul id="guestErrorUl"></ul>
+    <form action="post" id="reservationForm">
+
+      <label for="email">E-postadress: </label>
+      <input type="text" id="email">
+
+      <label for="phonenumber">Telefonnummer: </label>
+      <input type="text" id="phonenumber">
+
+      <label for="reservationDate">Datum:</label>
+      <input type="date" id="reservationDate">
+
+      <label for="reservationTime">Tid:</label>
+      <input type="time" id="reservationTime">
+
+      <label for="numberofPeople">Antal besökare (vid fler än 8 besökare måste ni ringa):</label>
+      <input type="number" step="1" min="1" max="8" id="numberofPeople">
+
+      <label for="comment">Något du vill meddela oss inför ditt besök: </label>
+      <textarea id="comment"></textarea>
+
+      <button type="submit" id="reservationButton">Skicka bokning</button>
+    </form>
+
+    <section id="confirmation" class="is_hidden">
+      <h2>Bokning genomförd!</h2>
+      <p id="confirmationID"></p>
+      <br>
+      <p>Vi har nu mottagit din bordsbokning och en bekräftelse kommer inom kort att skickas till din angivna
+        e-postadress.</p>
+    </section>
+
+    <section>
+      <h2>Se din bokning</h2>
+      <p id="getBookingError"></p>
+      <form id="getBookingForm">
+        <input type="text" id="bookingId" placeholder="Ange bokningsID">
+        <br>
+        <button type="submit" id="getBookingButton">Hämta bokning</button>
+      </form>
+      <div id="bookingResult"></div>
+    </section>
+
+  </main>
+  <footer>
+    <nav>
+      <ul id="footerList">
+        <li>Integritet</li>
+        <li>Arbeta i vårt team</li>
+        <li><a href="/gueststart.html#aboutUs">Om oss</a></li>
+      </ul>
+    </nav>
+  </footer>
+  <script type="module" src="/src/js/guestbooking.js"></script>
+</body>
+
+</html>

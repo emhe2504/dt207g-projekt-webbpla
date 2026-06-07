@@ -1,1 +1,659 @@
+.is_hidden {
+    display: none !important;
+}
 
+.lavishly-yours {
+    font-family: "Lavishly Yours", cursive;
+    font-weight: 400;
+    font-style: normal;
+}
+
+@keyframes fade {
+    to {
+        opacity: 1;
+        filter: brightness(1);
+    }
+}
+
+html,
+body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    width: 100%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #FFF4EC;
+    font-size: 15px;
+    letter-spacing: 0.5px;
+}
+
+main {
+    flex: 1;
+}
+
+#startDiv {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100svh;
+    background-image: url('/estradenStart.webp');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.8;
+    filter: brightness(0);
+    animation: fade 3s ease forwards;
+}
+
+#headerBild {
+    width: 100%;
+}
+
+#startHead,
+#estraden {
+    text-align: center;
+    font-size: 80px;
+    color: #6F4E37;
+}
+
+h1 {
+    text-align: center;
+    font-size: 45px;
+    color: #6F4E37;
+}
+
+#startHead {
+    align-self: center;
+    background-color: rgba(255, 255, 255, 0.65);
+    padding: 3%;
+    border-radius: 10px;
+}
+
+nav {
+    width: 35%;
+}
+
+nav ul {
+    display: flex;
+    width: 100%;
+    text-align: center;
+    gap: 40px;
+    list-style: none;
+    padding: 0;
+}
+
+nav ul li {
+    width: 100%;
+}
+
+#startChoices li a {
+    color: white;
+    font-weight: 500;
+    font-size: 16px;
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 5% 8%;
+}
+
+#startChoices li a:hover {
+    background-color: black;
+}
+
+p {
+    text-align: center;
+    max-width: 70ch;
+    margin: 0 auto;
+}
+
+#guestNavStart,
+#guestNav {
+    display: flex;
+    justify-content: center;
+    margin: 8% auto 0;
+}
+
+#adminMenu {
+    width: 80%;
+}
+
+#guestNav,
+#adminMenu {
+    margin: 3% auto;
+}
+
+#guestMenu {
+    display: flex;
+    list-style: none;
+    padding: 0;
+}
+
+#guestMenu li a {
+    color: black;
+    font-size: 18px;
+}
+
+#guestMenu li a:hover {
+    font-weight: 500;
+}
+
+#guestPicDiv {
+    display: flex;
+    justify-content: center;
+    gap: 8%;
+    margin: 10% 2%;
+}
+
+#sandwich,
+#pasta,
+#pizza {
+    width: 100%;
+    box-shadow: 1px 1px 1px grey;
+}
+
+h2,
+h3 {
+    text-align: center;
+}
+
+#restaurantImg {
+    display: block;
+    width: 70%;
+    margin: 10% auto;
+}
+
+#openingHours,
+#findUs {
+    margin: 10% auto;
+}
+
+#lunch,
+#dinner,
+#contactInfo {
+    line-height: 2.5em;
+}
+
+#reservationForm,
+#getBookingForm,
+#loginForm {
+    display: flex;
+    flex-direction: column;
+    width: 25%;
+    margin: 6% auto;
+    border: 1px solid #6F4E37;
+    padding: 4%;
+    background-color: white;
+}
+
+#reservationForm,
+#getBookingForm {
+    width: 30%;
+}
+
+#getBookingForm {
+    margin: 2% auto 5%;
+}
+
+#getBookingAdmin,
+#getMealForm {
+    display: flex;
+    flex-direction: column;
+    width: 45%;
+    margin: 2% auto 5%;
+    border: 1px solid #6F4E37;
+    padding: 4%;
+    background-color: white;
+}
+
+input[type="text"],
+input[type="date"],
+input[type="time"],
+input[type="number"],
+textarea,
+select {
+    margin-bottom: 5%;
+    padding: 1%;
+    border: 1px solid #6F4E37;
+}
+
+#reservationButton,
+#getBookingButton,
+#loginButton,
+#ADreservationButton,
+#ADupdateButton,
+#ADgetBookingButton,
+#changeBookingButton,
+#deleteBookingButton,
+#registrationButton,
+#addMenuButton,
+#getMealButton,
+#updateMenuButton,
+#changeMealButton,
+#deleteMealButton,
+#logOutButton {
+    padding: 1.5%;
+    border: 1px solid #6F4E37;
+    background-color: #ECB176;
+    width: 45%;
+    border-radius: 5px;
+}
+
+#changeBookingButton,
+#changeMealButton {
+    padding: 0.5%;
+    margin: 5% 0 0 2%;
+    width: 23%;
+}
+
+#deleteBookingButton,
+#deleteMealButton {
+    padding: 0.5%;
+    margin: 2% 0 0 2%;
+    width: 23%;
+}
+
+#logOutButton {
+    display: block;
+    width: 10%;
+    padding: 0.5%;
+    margin: 4% auto 0% auto;
+}
+
+#reservationButton:hover,
+#getBookingButton:hover,
+#loginButton:hover,
+#ADreservationButton:hover,
+#ADupdateButton:hover,
+#ADgetBookingButton:hover,
+#registrationButton:hover,
+#addMenuButton:hover,
+#updateMenuButton:hover,
+#getMealButton:hover {
+    background-color: #FED8B1;
+}
+
+.booking-list {
+    line-height: 2em;
+    list-style: none;
+    padding: 0;
+    margin-bottom: 3%;
+    font-size: 12px;
+}
+
+.booking-list li:first-child {
+    font-weight: bold;
+}
+
+#confirmation,
+#bookingResult,
+#adminResultDiv,
+#adminConfirmation,
+#getMealDiv,
+#menuConfirmation {
+    width: 55%;
+    margin: 6% auto;
+    border: 1px solid #6F4E37;
+    padding: 2%;
+    background-color: white;
+}
+
+#adminResultDiv,
+#getMealDiv {
+    width: 65%;
+    margin-bottom: 1%;
+}
+
+#menuPrint img {
+    display: block;
+    width: 55%;
+    margin: 6% auto;
+}
+
+#startersSection,
+#mainMealsSection,
+#dessertSection,
+#beverageSection {
+    margin: 4% auto;
+}
+
+#addBooking,
+#viewBooking,
+#registrationHead,
+#menuHead,
+#viewMeal {
+    margin: 6% auto 0 auto;
+}
+
+#menuNote {
+    margin: 2% auto 4% auto;
+}
+
+#adminBookings,
+#registerAdmin,
+#manageMenu {
+    width: 60%;
+    margin: 10% auto;
+    border: 1px solid #6F4E37;
+    padding: 1%;
+}
+
+#adminReservationForm,
+#adminRegistrationForm,
+#adminMenuForm {
+    display: flex;
+    flex-direction: column;
+    width: 45%;
+    margin: 3% auto;
+    border: 1px solid #6F4E37;
+    padding: 4%;
+    background-color: white;
+}
+
+#adminErrorUl,
+#regErrorUl,
+#regErrorP,
+#adminBookingError,
+#menuErrorUl,
+#getMealError,
+#loginError,
+#errorUl,
+#guestErrorUl,
+#getBookingError {
+    list-style: none;
+    color: red;
+    text-align: center;
+    margin: 3% auto;
+    padding: 0;
+}
+
+#errorUl {
+    margin: 0% auto;
+}
+
+#guestErrorUl {
+    margin-bottom: 0;
+}
+
+footer {
+    display: flex;
+    justify-content: center;
+    background-color: black;
+    padding: 3% 0;
+}
+
+footer nav ul {
+    display: flex;
+    list-style: none;
+    padding: 2%;
+}
+
+footer nav ul li,
+footer nav ul li a {
+    text-decoration: none;
+    color: white;
+}
+
+
+@media screen and (max-width: 1350px) {
+
+    #reservationForm,
+    #getBookingForm,
+    #loginForm {
+        width: 40%;
+    }
+
+    #menuPrint img {
+        width: 65%;
+    }
+
+    #adminBookings,
+    #registerAdmin,
+    #manageMenu {
+        width: 70%;
+    }
+
+    #adminReservationForm,
+    #adminRegistrationForm,
+    #adminMenuForm {
+        width: 55%;
+    }
+
+    #getBookingAdmin,
+    #getMealForm,
+    #confirmation,
+    #bookingResult,
+    #adminResultDiv,
+    #adminConfirmation,
+    #getMealDiv,
+    #menuConfirmation {
+        width: 65%;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+
+    #startHead {
+        font-size: 65px;
+    }
+
+    nav {
+        width: 50%;
+    }
+
+    #adminBookings,
+    #registerAdmin,
+    #manageMenu {
+        width: 80%;
+    }
+
+    #adminReservationForm,
+    #adminRegistrationForm,
+    #adminMenuForm {
+        width: 65%;
+    }
+
+}
+
+@media screen and (max-width: 1050px) {
+
+    body {
+        font-size: 14px;
+    }
+
+    #guestMenu li a {
+        font-size: 16px;
+    }
+
+    #reservationForm,
+    #getBookingForm,
+    #loginForm {
+        width: 50%;
+    }
+
+    #startersSection,
+    #mainMealsSection,
+    #dessertSection,
+    #beverageSection {
+        margin: 7% auto;
+    }
+
+    #adminMenu ul {
+        width: 60%;
+        flex-direction: column;
+        margin: 8% auto 10% auto;
+    }
+
+    #logOutButton {
+        width: 15%;
+    }
+
+    #changeBookingButton,
+    #changeMealButton,
+    #deleteBookingButton,
+    #deleteMealButton {
+        width: 40%;
+    }
+
+}
+
+
+@media screen and (max-width: 750px) {
+
+    #startHead {
+        font-size: 55px;
+    }
+
+    #startHead,
+    #estraden {
+        font-size: 70px;
+    }
+
+    h1 {
+        font-size: 30px;
+    }
+
+    h2 {
+        font-size: 18px;
+    }
+
+    nav {
+        width: 65%;
+    }
+
+    p {
+        max-width: 95%;
+    }
+
+    #reservationForm,
+    #getBookingForm,
+    #loginForm {
+        width: 70%;
+    }
+
+    #reservationButton,
+    #getBookingButton,
+    #loginButton,
+    #ADreservationButton,
+    #ADupdateButton,
+    #ADgetBookingButton,
+    #changeBookingButton,
+    #deleteBookingButton,
+    #registrationButton,
+    #addMenuButton,
+    #getMealButton,
+    #updateMenuButton,
+    #changeMealButton,
+    #deleteMealButton,
+    #logOutButton {
+        font-size: 12px;
+    }
+
+    #menuPrint img {
+        width: 75%;
+    }
+
+    #logOutButton {
+        width: 25%;
+    }
+
+    #adminBookings,
+    #registerAdmin,
+    #manageMenu {
+        width: 80%;
+        margin-bottom: 15%;
+    }
+
+    #adminBookings,
+    #registerAdmin,
+    #manageMenu {
+        margin-top: 15%;
+    }
+
+    #adminReservationForm,
+    #adminRegistrationForm,
+    #adminMenuForm {
+        width: 75%;
+    }
+
+    #getBookingAdmin,
+    #getMealForm,
+    #confirmation,
+    #bookingResult,
+    #adminResultDiv,
+    #adminConfirmation,
+    #getMealDiv,
+    #menuConfirmation {
+        width: 75%;
+    }
+
+}
+
+@media screen and (max-width: 500px) {
+
+    body {
+        font-size: 12px;
+    }
+
+    h2 {
+        font-size: 15px;
+    }
+
+    #startHead {
+        font-size: 52px;
+    }
+
+    #guestMenu li a {
+        font-size: 14px;
+    }
+
+    nav {
+        width: 85%;
+    }
+
+    #reservationForm,
+    #getBookingForm,
+    #loginForm {
+        width: 80%;
+    }
+
+    #startersSection,
+    #mainMealsSection,
+    #dessertSection,
+    #beverageSection {
+        margin: 14% auto;
+    }
+
+    #menuPrint img {
+        width: 85%;
+    }
+
+    input[type="text"],
+    input[type="date"],
+    input[type="time"],
+    input[type="number"],
+    textarea,
+    select {
+        font-size: 12px;
+    }
+
+    #confirmation,
+    #bookingResult,
+    #adminResultDiv,
+    #adminConfirmation,
+    #getMealDiv,
+    #menuConfirmation {
+        width: 85%;
+    }
+
+    #changeBookingButton,
+    #changeMealButton,
+    #deleteBookingButton,
+    #deleteMealButton {
+        width: 50%;
+        margin: 4% auto 0% auto;
+    }
+
+}

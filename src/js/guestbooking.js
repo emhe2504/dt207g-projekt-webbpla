@@ -66,7 +66,7 @@ async function addBooking(event) {
 
     try {
 
-        const response = await fetch("http://localhost:3001/guestReservation", {
+        const response = await fetch("https://estraden-webbtj.onrender.com/guestReservation", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -122,7 +122,7 @@ async function getOneBooking(event) {
 
     try {
 
-        const response = await fetch(`http://localhost:3001/guestReservation/${addedID}`, {
+        const response = await fetch(`https://estraden-webbtj.onrender.com/guestReservation/${addedID}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json"

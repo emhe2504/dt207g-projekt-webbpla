@@ -24,7 +24,7 @@ async function getMenu() {
 
     try {
 
-        const fetchData = await fetch("http://localhost:3001/menu");
+        const fetchData = await fetch("https://estraden-webbtj.onrender.com/menu");
         const jsonData = await fetchData.json();
 
         renderMenu(jsonData);

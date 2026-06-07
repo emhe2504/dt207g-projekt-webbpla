@@ -130,7 +130,7 @@ async function addAdminBooking(event) {
 
     try {
 
-        const response = await fetch("http://localhost:3001/employeereservation", {
+        const response = await fetch("https://estraden-webbtj.onrender.com/employeereservation", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -199,7 +199,7 @@ async function getOneAdminBooking(event) {
 
     try {
 
-        const response = await fetch(`http://localhost:3001/employeereservation/${addedID}`, {
+        const response = await fetch(`https://estraden-webbtj.onrender.com/employeereservation/${addedID}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -253,7 +253,7 @@ async function getAllBookings() {
 
     try {
 
-        const response = await fetch(`http://localhost:3001/employeereservation`, {
+        const response = await fetch(`https://estraden-webbtj.onrender.com/employeereservation`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -392,7 +392,7 @@ async function updateBooking() {
 
     try {
 
-        const response = await fetch(`http://localhost:3001/employeereservation/${id}`, {
+        const response = await fetch(`https://estraden-webbtj.onrender.com/employeereservation/${id}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
@@ -451,7 +451,7 @@ async function deleteBooking() {
 
     try {
 
-        const response = await fetch(`http://localhost:3001/employeereservation/${id}`, {
+        const response = await fetch(`https://estraden-webbtj.onrender.com/employeereservation/${id}`, {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json",
@@ -530,7 +530,7 @@ async function registerAdmin(event) {
 
     try {
 
-        const response = await fetch("http://localhost:3001/employee/register", {
+        const response = await fetch("https://estraden-webbtj.onrender.com/employee/register", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -604,7 +604,7 @@ async function addMeal(event) {
 
     try {
 
-        const response = await fetch("http://localhost:3001/menu", {
+        const response = await fetch("https://estraden-webbtj.onrender.com/menu", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -667,7 +667,7 @@ async function getOneMeal(event) {
 
     try {
 
-        const response = await fetch(`http://localhost:3001/menu/${addedID}`, {
+        const response = await fetch(`https://estraden-webbtj.onrender.com/menu/${addedID}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -767,7 +767,7 @@ async function updateMeal() {
 
     try {
 
-        const response = await fetch(`http://localhost:3001/menu/${id}`, {
+        const response = await fetch(`https://estraden-webbtj.onrender.com/menu/${id}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
@@ -820,7 +820,7 @@ async function deleteMeal() {
 
     try {
 
-        const response = await fetch(`http://localhost:3001/menu/${id}`, {
+        const response = await fetch(`https://estraden-webbtj.onrender.com/menu/${id}`, {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json",
